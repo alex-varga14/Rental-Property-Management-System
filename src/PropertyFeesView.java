@@ -22,8 +22,9 @@ public class PropertyFeesView  extends JFrame
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setIconImage(img.getImage());
+		PropertyFees currentFees = PropertyFees.getInstance();
 		 
-		JLabel info = new JLabel("It costs $100 to List a Property for 60 days.");
+		JLabel info = new JLabel("It costs $" + currentFees.getFee() + " to List a Property for " + currentFees.getPeriod() + " days.");
 		info.setFont(new Font("Arial", Font.BOLD, 22));
 		info.setBounds(20, 10, 500, 40);
 		getContentPane().add(info);
@@ -37,7 +38,7 @@ public class PropertyFeesView  extends JFrame
 	   	getContentPane().add(enterButton);
 	   	enterButton.setActionCommand("list property");
 	   	
-	   	signUpButton.setBounds(300, 90, 120, 40);
+	   	signUpButton.setBounds(300, 90, 140, 40);
 	   	getContentPane().add(signUpButton);
 	   	signUpButton.setActionCommand("cancel");
 	 }

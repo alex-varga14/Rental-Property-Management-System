@@ -87,7 +87,23 @@ public class ManagerView extends JFrame
 		public void addViewPropertyListener(ActionListener a) {
 			viewListedProperties.addActionListener(a);
 		}
-		public void addRegisterPropertyListener(ActionListener a) {
-			//regNewProperty.addActionListener(a);
+		public void addChangePropertyFeeListener(ActionListener a) {
+			changeFees.addActionListener(a);
 		}
+		public void addPropertyPeriodListener(ActionListener a) {
+			changePeriod.addActionListener(a);
+		}
+		public void addViewRentersListener(ActionListener a) {
+			renters.addActionListener(a);
+		}
+		public void addViewLanlordsListener(ActionListener a) {
+			lanlords.addActionListener(a);
+		}
+		public void addPropertyInfoListener(ActionListener a) {
+			propertiesInfo.addActionListener(a);
+		}
+		public void addSummaryListener(ActionListener a) {
+			viewSummary.addActionListener(a);
+		}
+		
 }

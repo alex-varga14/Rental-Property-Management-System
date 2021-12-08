@@ -44,7 +44,7 @@ public class RegPropertyView extends JFrame
     	getContentPane().add(text);
     	
     	enterButton.setFont(new Font("Arial", Font.BOLD, 13));
-    	enterButton.setBounds(185, 125, 150, 30);
+    	enterButton.setBounds(160, 125, 150, 30);
     	getContentPane().add(enterButton);
     	enterButton.setActionCommand("register property");
     	
@@ -83,11 +83,10 @@ public class RegPropertyView extends JFrame
         address.setFont(new Font("Arial", Font.BOLD, 16));
         address.setBounds(10, 95, 90, 20);
     	getContentPane().add(address);
-        addressInput.setBounds(100, 90, 300, 30);
+        addressInput.setBounds(100, 90, 250, 30);
     	getContentPane().add(addressInput);
     	addressInput.setColumns(10);
-		
-		
+			
 	}
 	
 	public void addRegPropertyListener(ActionListener al)  {
