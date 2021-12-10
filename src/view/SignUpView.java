@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 public class SignUpView extends JFrame
 {
 	
-	ImageIcon img = new ImageIcon("C:\\Users\\Alex School\\eclipse-workspace\\ENSF480_RPMS\\src\\assets/Untitled.png");
+	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	private JTextField emailInput;
 	String[] optionsToChoose = {"Manager", "Lanlord", "Registered Renter"};
     JComboBox<String> jComboBox = new JComboBox<>(optionsToChoose);

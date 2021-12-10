@@ -14,7 +14,7 @@ import model.PropertyFees;
 public class ChangePeriodView extends JFrame
 {
 	
-	 ImageIcon img = new ImageIcon("C:\\Users\\Alex School\\eclipse-workspace\\ENSF480_RPMS\\src\\assets/Untitled.png");
+	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	 JButton changeFeeButton = new JButton("Change Period");
 	 JButton cancelButton = new JButton("Cancel Change");
 	 JTextField newFee = new JTextField();

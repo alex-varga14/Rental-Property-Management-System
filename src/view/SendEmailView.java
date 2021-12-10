@@ -1,13 +1,19 @@
 package view;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
 
 public class SendEmailView extends JFrame
 {
-	ImageIcon img = new ImageIcon("C:\\Users\\Alex School\\eclipse-workspace\\ENSF480_RPMS\\src\\assets/Untitled.png");
+	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
+	
+	JTextArea message = new JTextArea();
+    JButton sendEmail = new JButton("Send Email");
 	
 	public SendEmailView()
 	{
@@ -16,8 +22,39 @@ public class SendEmailView extends JFrame
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = screenSize.height;
 		int width = screenSize.width;
+		setResizable(false);
 		setSize(width/2, height/2);
 		setLocationRelativeTo(null);
 		setIconImage(img.getImage());
+        
+        sendEmail.setActionCommand("send email");
+
+        JLabel space2 = new JLabel("  ");
+
+        JScrollPane emailBody = new JScrollPane(message);
+        emailBody.setPreferredSize(new Dimension(100, 400));
+        emailBody.setBorder(BorderFactory.createTitledBorder("Email Body"));
+        emailBody.setViewportView(message);
+        emailBody.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JPanel bigButtons = new JPanel();
+        bigButtons.setLayout(new BoxLayout(bigButtons, BoxLayout.PAGE_AXIS));
+        bigButtons.add(sendEmail);
+
+        JPanel all = new JPanel();
+        all.setLayout(new BoxLayout(all, BoxLayout.PAGE_AXIS));
+        all.add(emailBody);
+        all.add(space2);
+        all.add(bigButtons);
+        all.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        add(all);
+	}
+	
+	public void addSendEmailListener(ActionListener a)  {
+		sendEmail.addActionListener(a);
+	}
+	
+	public String getBody ()
+	{
+		return message.getText();
 	}
 }

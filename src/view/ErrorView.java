@@ -10,8 +10,8 @@ import javax.swing.JLabel;
 
 public class ErrorView extends JFrame
 {
-	 ImageIcon img = new ImageIcon("C:\\Users\\Alex School\\eclipse-workspace\\ENSF480_RPMS\\src\\assets/Untitled.png");
-	 JButton enterButton = new JButton("Try again");
+	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
+	JButton enterButton = new JButton("Try again");
 	 JButton signUpButton = new JButton("Sign Up");
 	 public ErrorView() {
 		setTitle("Master Rental Property Management - Login Error");

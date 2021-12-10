@@ -17,7 +17,7 @@ import model.Property.*;
 public class ChangeStateView extends JFrame
 {
 	
-	 ImageIcon img = new ImageIcon("C:\\Users\\Alex School\\eclipse-workspace\\ENSF480_RPMS\\src\\assets/Untitled.png");
+	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	 JButton changeStateButton = new JButton("Change Listing State");
 	 JButton cancelButton = new JButton("Cancel Change");
 	 

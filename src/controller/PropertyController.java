@@ -2,6 +2,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import model.Database;
 import view.PropertyView;
 
 public class PropertyController implements ActionListener
@@ -34,7 +35,7 @@ public class PropertyController implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("email")) {
 			theView.setVisible(false);
-			EmailController sendEmail = new EmailController("send");
+			EmailController sendEmail = new EmailController("send", theView.getID());
 		}
 		if(e.getActionCommand().equals("state")) {
 			theView.setVisible(false);

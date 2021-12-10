@@ -21,7 +21,7 @@ import model.Manager;
 
 public class PropertyView extends JFrame
 {
-	ImageIcon img = new ImageIcon("C:\\Users\\Alex School\\eclipse-workspace\\ENSF480_RPMS\\src\\assets/Untitled.png");
+	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	private ArrayList<Property> propertyList = new ArrayList<Property>();
 	
 	//String[] columnNames = {"Picture", "ID", "Type","numOfBathroom",  "numOfBedroom", "isFurnished", "Address", "cityQuadrant", "ListingState"};
@@ -106,6 +106,7 @@ public class PropertyView extends JFrame
 				}
 				else {
 					getContentPane().add(emailButton);
+					ID = propertyTable.getValueAt(propertyTable.getSelectedRow(),  0).toString();
 					System.out.println("Renter");
 				}
 		    	getContentPane().repaint();

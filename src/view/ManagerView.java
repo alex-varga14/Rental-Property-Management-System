@@ -18,7 +18,7 @@ import javax.swing.JMenuItem;
 
 public class ManagerView extends JFrame
 {
-	ImageIcon img = new ImageIcon("C:\\Users\\Alex School\\eclipse-workspace\\ENSF480_RPMS\\src\\assets/Untitled.png");
+	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	private JMenu properties = new JMenu("Properties");
 	private JMenu propertieFees = new JMenu("Property Fees/Period");
 	private JMenu personInformation = new JMenu("Personel Information");

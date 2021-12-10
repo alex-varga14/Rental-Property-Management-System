@@ -14,7 +14,7 @@ import model.PropertyFees;
 public class ChangeFeeView extends JFrame
 {
 	
-	 ImageIcon img = new ImageIcon("C:\\Users\\Alex School\\eclipse-workspace\\ENSF480_RPMS\\src\\assets/Untitled.png");
+	 ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	 JButton enterButton = new JButton("Change Fee");
 	 JButton signUpButton = new JButton("Cancel Change");
 	 JTextField newFee = new JTextField();

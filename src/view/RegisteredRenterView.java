@@ -18,7 +18,7 @@ import javax.swing.JMenuItem;
 
 public class RegisteredRenterView extends JFrame
 {
-	ImageIcon img = new ImageIcon("C:\\Users\\Alex School\\eclipse-workspace\\ENSF480_RPMS\\src\\assets/Untitled.png");
+	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	private JMenu searchProperties = new JMenu("Search Properties");
 	private JMenu matchedProperties = new JMenu("Matching Properties");
 	private JMenu emails = new JMenu("Emails");

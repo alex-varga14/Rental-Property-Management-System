@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 
 public class DuplicateEmailErrorView extends JFrame
 {
-	ImageIcon img = new ImageIcon("C:\\Users\\Alex School\\eclipse-workspace\\ENSF480_RPMS\\src\\assets/Untitled.png");
+	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	JButton enterButton = new JButton("Try again");
 	JButton signInButton = new JButton("Sign In");
 	

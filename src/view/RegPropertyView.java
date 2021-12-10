@@ -16,7 +16,7 @@ import model.Quadrant;
 
 public class RegPropertyView extends JFrame
 {
-	ImageIcon img = new ImageIcon("C:\\Users\\Alex School\\eclipse-workspace\\ENSF480_RPMS\\src\\assets/Untitled.png");
+	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	JButton enterButton = new JButton("Register Property");
 	String[] propertyTypes = {"", PropertyTypes.APARTMENT.toString(), PropertyTypes.CONDO.toString(), PropertyTypes.ATTACHED_HOUSE.toString(), PropertyTypes.DETACHED_HOUSE.toString(), 
 			PropertyTypes.TOWN_HOUSE.toString(), PropertyTypes.SINGLE_FAMILY_HOME.toString(), PropertyTypes.MULTI_FAMILY_HOME.toString() };

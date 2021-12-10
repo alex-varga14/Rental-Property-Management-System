@@ -13,7 +13,7 @@ public class ClientView extends JFrame
 	private JMenu sourceMenu = new JMenu("Login or Sign Up");
 	private JMenuItem login = new JMenuItem("Login");
 	private JMenuItem signUp = new JMenuItem("Sign Up");
-	ImageIcon img = new ImageIcon("C:\\Users\\Alex School\\eclipse-workspace\\ENSF480_RPMS\\src\\assets/Untitled.png");
+	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	
 	public ClientView() {
 		setTitle("Master Rental Property Management");

@@ -17,7 +17,7 @@ import model.Database;
 
 public class SummaryView extends JFrame
 {
-	ImageIcon img = new ImageIcon("C:\\Users\\Alex School\\eclipse-workspace\\ENSF480_RPMS\\src\\assets/Untitled.png");
+	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	Database access = Database.getInstance();
 	int totalHouses;
 	int rentedHouses;

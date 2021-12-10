@@ -47,21 +47,36 @@ public class Database
 	}
 	
 	 public String findUser(String type, String p){
-	        StringBuilder tmp = new StringBuilder("");
-	        try {
-	            Statement myStmt = dbConnect.createStatement();
-	            results = myStmt.executeQuery("SELECT logintype FROM USERS WHERE username = '" + type + "' AND password = '" + p +"'");
-	            while(results.next()){
-	                tmp.append(results.getString("logintype"));
-	                //return "USER FOUND";
-				}
-				myStmt.close();
-			} catch (SQLException i) {
-				i.printStackTrace();
+        StringBuilder tmp = new StringBuilder("");
+        try {
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT logintype FROM USERS WHERE username = '" + type + "' AND password = '" + p +"'");
+            while(results.next()){
+                tmp.append(results.getString("logintype"));
+                //return "USER FOUND";
 			}
-            //return "USER NOT FOUND";
-	        return tmp.toString();
-	    }
+			myStmt.close();
+		} catch (SQLException i) {
+			i.printStackTrace();
+		}
+        //return "USER NOT FOUND";
+        return tmp.toString();
+    }
+	 
+	 public String findLanlordEmail(String ID){
+        StringBuilder tmp = new StringBuilder("");
+        try {
+            Statement myStmt = dbConnect.createStatement();
+            results = myStmt.executeQuery("SELECT lanlordemail FROM LISTEDPROPERTIES WHERE ID = '" + ID + "'");
+            while(results.next()){
+                tmp.append(results.getString("lanlordemail"));
+			}
+			myStmt.close();
+		} catch (SQLException i) {
+			i.printStackTrace();
+		}
+        return tmp.toString();
+    }
 	 
 	 public void addUser(String username, String password, String logintype)
 	 {
@@ -406,6 +421,92 @@ public class Database
 		}
 		System.out.println(tmp.toString());
 	}
+	
+	public void sendEmail(String sender, String receiver, String body)
+	 {
+		 try {
+	        	String query = "INSERT INTO emails ( sender, receiver, message) VALUES (?, ?, ?)";
+	        	PreparedStatement myStmt = dbConnect.prepareStatement(query);
+	        	myStmt.setString(1, sender);
+	            myStmt.setString(2, receiver);
+	            myStmt.setString(3, body);
+	            int rowCount = myStmt.executeUpdate();
+	            System.out.println("Rows affected: " + rowCount);
+	            myStmt.close();
+
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	 }
+	
+	public String[][] getAllMessages()
+	{
+		String[][] inbox = new String[numberOfMessages()][];
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM emails where receiver ='" + Lanlord.getInstance().getEmailAddress() + "'";
+			rs = stmt.executeQuery(query);
+			int i = 0;
+			while(rs.next()) {
+				inbox[i] = new String[]{ rs.getString("SENDER"), rs.getString("MESSAGE")};
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		return inbox;
+	}
+	
+	public int numberOfMessages()
+	{
+		int count = 0;
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT COUNT(*) FROM emails where receiver='" + Lanlord.getInstance().getEmailAddress() + "'";
+			rs = stmt.executeQuery(query);
+			rs.next();
+			count = rs.getInt(1);
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		return count;
+	}
+	
+//	public static boolean sendMail(String message, User sender, User receiver) {
+//    	String query = "INSERT INTO mail (sender, receiver, message) VALUES (?,?,?)";
+//    	try {
+//			PreparedStatement stm = databaseConnection.prepareStatement(query);
+//			
+//			stm.setString(1, sender.getUsername());
+//			System.out.println(sender.getUsername());
+//			System.out.println(receiver.getUsername());
+//			stm.setString(2, receiver.getUsername());
+//			stm.setString(3, message);
+//			
+//			int rowCount = stm.executeUpdate();
+//			stm.close();
+//			
+//			DatabaseConnectivity.updateListOfUsers();
+//			if(rowCount > 0) {			
+//				return true;
+//			}
+//			else {
+//				return false;
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			System.err.println("Error sending mail to DB");
+//			return false;
+//		}
+//    }
 
 }
 /*
