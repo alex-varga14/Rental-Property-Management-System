@@ -81,12 +81,24 @@ public class Database
 		 LoginController login = new LoginController();
 	 }
 	 
+	 public void updatePropertyState(String propID, String s) {
+		 try 
+		 {
+            Statement myStmt = dbConnect.createStatement();
+            myStmt.executeUpdate("UPDATE listedproperties SET stateoflisting = '"+ s + "' WHERE ID='"+ propID +"'");
+            myStmt.close();
+		} catch (SQLException e) {
+			System.err.println("Error changing state in DB");
+			e.printStackTrace();
+		}
+	 }
+	 
 		
 	public void listNewProperty(Property n)
 	{
         try {
-        	String query = "INSERT INTO listedproperties ( type, numberOfBaths, numberOfBedrooms, furnished, address, quadrant, stateOfListing, listingStart, listingEnd) "
-        			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        	String query = "INSERT INTO listedproperties ( type, numberOfBaths, numberOfBedrooms, furnished, address, quadrant, stateOfListing, listingStart, listingEnd, lanlordEmail) "
+        			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         	PreparedStatement myStmt = dbConnect.prepareStatement(query);
         	myStmt.setString(1, n.getTypeOfProperty());
             myStmt.setInt(2, n.getNumberOfBathrooms());
@@ -97,6 +109,7 @@ public class Database
             myStmt.setString(7, n.getState().toString());
             myStmt.setString(8, n.getInformation().getFeePeriodStart());
             myStmt.setString(9, n.getInformation().getFeePeriodEnd());
+            myStmt.setString(10, n.getLanlordEmail());
             int rowCount = myStmt.executeUpdate();
             System.out.println("Rows affected: " + rowCount);
             myStmt.close();
@@ -104,6 +117,264 @@ public class Database
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+	}
+	
+	public String[][] getAllProperties()
+	{
+		String[][] propertyData = new String[numberOfProperties()][];
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties";
+			rs = stmt.executeQuery(query);
+			int i = 0;
+			while(rs.next()) {
+				propertyData[i] = new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") };
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllPropertiesManager()
+	{
+		String[][] propertyData = new String[numberOfProperties()][];
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties";
+			rs = stmt.executeQuery(query);
+			int i = 0;
+			while(rs.next()) {
+				propertyData[i] = new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING"), rs.getString("LISTINGSTART"), 
+								rs.getString("LISTINGEND"), rs.getString("lanlordEmail") };
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		return propertyData;
+	}
+	public String[][] getAllPropertiesManagerSummary()
+	{
+		String[][] propertyData = new String[numberOfProperties()][];
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties";
+			rs = stmt.executeQuery(query);
+			int i = 0;
+			while(rs.next()) {
+				propertyData[i] = new String[]{ rs.getString("lanlordEmail"), rs.getString("ID"), rs.getString("ADDRESS")};
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllLanlordProperties(String e)
+	{
+		String[][] propertyData = new String[lanlordnNumberOfProperties()][];
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties where lanlordemail='" + Lanlord.getInstance().getEmailAddress() +"'";
+			rs = stmt.executeQuery(query);
+			int i = 0;
+			while(rs.next()) {
+				propertyData[i] = new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") };
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		return propertyData;
+	}
+	/*
+	 * 
+	 * //int randomPropertyPicture = (int)(1 + (Math.random() * 4));
+				//ImageIcon randomImage = new ImageIcon("C:\\Users\\Alex School\\Desktop\\git\\Rental Property Management System\\Rental Property Management System\\src\\assets/"+ randomPropertyPicture + "jpg");
+//				propertyData[i] = new Object[]{randomImage,  rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+//						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+//								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") };
+	 */
+	
+	public String[][] getAllRenters()
+	{
+		String[][] renterData = new String[numberOfRenters()][];
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM users where loginType='Registered Renter'";
+			rs = stmt.executeQuery(query);
+			int i = 0;
+			while(rs.next()) {
+				renterData[i] = new String[]{ rs.getString("USERNAME"), rs.getString("PASSWORD")};
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		return renterData;
+	}
+	public String[][] getAllLanlords()
+	{
+		String[][] renterData = new String[numberOfLanlords()][];
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM users where loginType='Lanlord'";
+			rs = stmt.executeQuery(query);
+			int i = 0;
+			while(rs.next()) {
+				renterData[i] = new String[]{ rs.getString("USERNAME"), rs.getString("PASSWORD")};
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		return renterData;
+	}
+	
+	public int numberOfProperties()
+	{
+		int count = 0;
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT COUNT(*) FROM listedproperties";
+			rs = stmt.executeQuery(query);
+			rs.next();
+			count = rs.getInt(1);
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		return count;
+	}
+	
+	public int numberOfRentedProperties()
+	{
+		int count = 0;
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT COUNT(*) FROM listedproperties where stateOflisting ='RENTED'";
+			rs = stmt.executeQuery(query);
+			rs.next();
+			count = rs.getInt(1);
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		return count;
+	}
+	
+	public int numberOfActiveProperties()
+	{
+		int count = 0;
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT COUNT(*) FROM listedproperties where stateOflisting ='ACTIVE'";
+			rs = stmt.executeQuery(query);
+			rs.next();
+			count = rs.getInt(1);
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		return count;
+	}
+	public int numberOfRenters()
+	{
+		int count = 0;
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT COUNT(*) FROM users where logintype='Registered Renter'";
+			rs = stmt.executeQuery(query);
+			rs.next();
+			count = rs.getInt(1);
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		return count;
+	}
+	
+	public int numberOfLanlords()
+	{
+		int count = 0;
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT COUNT(*) FROM users where logintype='Lanlord'";
+			rs = stmt.executeQuery(query);
+			rs.next();
+			count = rs.getInt(1);
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		return count;
+	}
+	
+	public int lanlordnNumberOfProperties()
+	{
+		int count = 0;
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT COUNT(*) FROM listedproperties where lanlordemail='"+ Lanlord.getInstance().getEmailAddress() +"'";
+			rs = stmt.executeQuery(query);
+			rs.next();
+			count = rs.getInt(1);
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		return count;
 	}
 	
 	public void searchListings(String propertyType, int numberOfBaths, int numberOfBedrooms, boolean furnished, String quadrant)

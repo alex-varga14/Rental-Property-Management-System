@@ -1,12 +1,52 @@
 import java.util.ArrayList;
 
-public class RegisteredRenter extends User 
+public class RegisteredRenter 
 {
 	public ArrayList<PropertyListings> favouritedProperties;
+	private static RegisteredRenter instance;
+	private String emailAddress;
+	private String password;
 	
-	public RegisteredRenter(String firstName, String lastName, String emailAddress, String password, String user) {
-		super(firstName, lastName, emailAddress, password, user);
+	public RegisteredRenter(String emailAddress, String password) {
+		this.setEmailAddress(emailAddress);
+		this.setPassword(password);
 	}
+	public RegisteredRenter() {}
+	
+	public static RegisteredRenter getInstance(String emailAddress, String password)
+	{
+		if(instance == null) 
+		{
+			instance = new RegisteredRenter(emailAddress, password);
+		}
+		return instance;
+	}
+	
+	public static RegisteredRenter getInstance()
+	{
+		if(instance == null) 
+		{
+			instance = new RegisteredRenter();
+		}
+		return instance;
+	}
+	
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 	/*
 	public void update(ArrayList<PropertyListings> in)
 	{

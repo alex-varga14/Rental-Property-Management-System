@@ -18,6 +18,9 @@ public class RegisteredRenterController implements ActionListener
 	public void addListenersToView()
 	{
 		theView.addSearchListener(this);
+		theView.addSendEmailListener(this);
+		theView.addInboxListener(this);
+		theView.addMatchesListener(this);
 	}
 
 	@Override
@@ -32,8 +35,11 @@ public class RegisteredRenterController implements ActionListener
 		}
 		if(e.getActionCommand().equals("inbox")) {
 			theView.setVisible(false);
-			//SearchController searchController = new SearchController();
-			//EmailController
+			EmailController sendEmail = new EmailController("inbox");
+		}
+		if(e.getActionCommand().equals("send email")) {
+			theView.setVisible(false);
+			EmailController sendEmail = new EmailController("send");
 		}
 		
 	}

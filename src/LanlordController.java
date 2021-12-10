@@ -16,17 +16,27 @@ public class LanlordController implements ActionListener
 	{
 		theView.addViewPropertyListener(this);
 		theView.addRegisterPropertyListener(this);
+		theView.addSendEmailListener(this);
+		theView.addInboxListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("view listed")) {
 			theView.setVisible(false);
-			//SearchController searchController = new SearchController();
+			PropertyController propertyController = new PropertyController();
 		}
 		if(e.getActionCommand().equals("register new property")) {
 			theView.setVisible(false);
 			RegPropertyController registerPropertyController = new RegPropertyController();
+		}
+		if(e.getActionCommand().equals("send email")) {
+			theView.setVisible(false);
+			EmailController sendEmail = new EmailController("send");
+		}
+		if(e.getActionCommand().equals("inbox")) {
+			theView.setVisible(false);
+			EmailController sendEmail = new EmailController("inbox");
 		}
 		
 	}

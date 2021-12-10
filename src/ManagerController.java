@@ -28,7 +28,7 @@ public class ManagerController implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("view listed")) {
 			theView.setVisible(false);
-			//SearchController searchController = new SearchController();
+			PropertyController propertyController = new PropertyController();
 		}
 		if(e.getActionCommand().equals("change fees")) {
 			theView.setVisible(false);
@@ -40,15 +40,19 @@ public class ManagerController implements ActionListener
 		}
 		if(e.getActionCommand().equals("view renters")) {
 			theView.setVisible(false);
+			InformationController renterInfoController = new InformationController("Registered Renter");
 		}
 		if(e.getActionCommand().equals("view lanlords")) {
 			theView.setVisible(false);
+			InformationController lanlordInfoController = new InformationController("Lanlord");
 		}
 		if(e.getActionCommand().equals("view property info")) {
 			theView.setVisible(false);
+			InformationController propertyInfoController = new InformationController("Property");
 		}
 		if(e.getActionCommand().equals("view summary")) {
 			theView.setVisible(false);
+			SummaryController summaryController = new SummaryController();
 		}
 		
 	}

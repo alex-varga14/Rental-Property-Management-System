@@ -21,6 +21,16 @@ public class SearchController implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("search")) {
 			theView.setVisible(false);
+			PropertyController properties = new PropertyController();
 		}
 	}
 }
+/*
+ if((theView.getPropertyBox().equals(""))&& (String.valueOf(theView.getBedroomsBox()).equals(""))&& (String.valueOf(theView.getBathroomsBox()).equals("")) &&
+					(String.valueOf(theView.getFurnishedBox()).equals("")) && (theView.getQuadrantBox().equals("")))
+			{
+				PropertyController prop = new PropertyController();
+			}
+			PropertyController properties = new PropertyController(theView.getPropertyBox(), theView.getBedroomsBox(),theView.getBathroomsBox(),
+					theView.getFurnishedBox(), theView.getQuadrantBox());
+					*/

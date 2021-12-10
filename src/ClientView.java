@@ -22,6 +22,7 @@ public class ClientView extends JFrame
 		int width = screenSize.width;
 		setSize(width/2, height/2);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		setIconImage(img.getImage());
 		try
 		{

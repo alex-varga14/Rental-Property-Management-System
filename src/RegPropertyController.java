@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 public class RegPropertyController implements ActionListener
 {
 	private RegPropertyView theView;
-	private Lanlord currentLanlord;
+	private Lanlord currentLanlord = Lanlord.getInstance();
 	private Property currentProperty;
 	
 	public RegPropertyController()
@@ -24,8 +24,8 @@ public class RegPropertyController implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("register property")) {
 			theView.setVisible(false);
-			currentProperty = currentLanlord.getInstance().getLanlord().registerProperty(theView.getPropertyBox(), theView.getAddressField(), theView.getBathroomsBox(), theView.getBedroomsBox()
-					, theView.getFurnishedBox(), theView.getQuadrantBox());
+			currentProperty = currentLanlord.registerProperty(theView.getPropertyBox(), theView.getAddressField(), theView.getBathroomsBox(), theView.getBedroomsBox()
+					, theView.getFurnishedBox(), theView.getQuadrantBox(), currentLanlord.getEmailAddress());
 			PropertyFeesController feeController = new PropertyFeesController(currentProperty);
 		}
 		

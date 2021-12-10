@@ -13,6 +13,7 @@ public class PropertyFeesView  extends JFrame
 	 JButton enterButton = new JButton("List Property");
 	 JButton signUpButton = new JButton("Cancel Registration");
 	 
+	 
 	 public PropertyFeesView() {
 		setTitle("Master Rental Property Management - Property Fee");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

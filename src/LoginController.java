@@ -31,9 +31,19 @@ public class LoginController implements ActionListener
 			{
 				ErrorController errorController = new ErrorController();
 			}
-			else {
-			homeScreen(loginType);
+			if(loginType.equals("Lanlord"))
+			{
+				Lanlord l = Lanlord.getInstance(loginView.getEmail(), loginView.getPassword());
 			}
+			if(loginType.equals("Manager"))
+			{
+				Manager l = Manager.getInstance(loginView.getEmail(), loginView.getPassword());
+			}
+			if(loginType.equals("Registered Renter"))
+			{
+				RegisteredRenter l = RegisteredRenter.getInstance(loginView.getEmail(), loginView.getPassword());
+			}
+			homeScreen(loginType);
 		}
 		
 	}

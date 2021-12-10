@@ -23,6 +23,7 @@ public class LanlordView extends JFrame
 	private JMenuItem viewListedProperties = new JMenuItem("My Listed Properties");
 	private JMenuItem regNewProperty = new JMenuItem("Register New Property");
 	private JMenuItem inbox = new JMenuItem("Inbox");
+	private JMenuItem sendEmail = new JMenuItem("Send Email");
 	
 	public LanlordView()
 	{
@@ -30,6 +31,7 @@ public class LanlordView extends JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().setBackground(new Color(230, 230, 250));
+		setResizable(false);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = screenSize.height;
 		int width = screenSize.width;
@@ -59,6 +61,8 @@ public class LanlordView extends JFrame
 		emails.setMnemonic(KeyEvent.VK_S);
 		emails.add(inbox);
 		inbox.setActionCommand("inbox");
+		emails.add(sendEmail);
+		sendEmail.setActionCommand("send email");
 		bar.add(emails);
 		
         setJMenuBar(bar);
@@ -69,6 +73,12 @@ public class LanlordView extends JFrame
 	}
 	public void addRegisterPropertyListener(ActionListener a) {
 		regNewProperty.addActionListener(a);
+	}
+	public void addSendEmailListener(ActionListener a) {
+		sendEmail.addActionListener(a);
+	}
+	public void addInboxListener(ActionListener a) {
+		inbox.addActionListener(a);
 	}
 	
 }

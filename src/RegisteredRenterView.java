@@ -24,6 +24,7 @@ public class RegisteredRenterView extends JFrame
 	private JMenuItem search = new JMenuItem("Search Listed");
 	private JMenuItem matching = new JMenuItem("View Matched Listings");
 	private JMenuItem inbox = new JMenuItem("Inbox");
+	private JMenuItem sendEmail = new JMenuItem("Send Email");
 	
 	public RegisteredRenterView()
 	{
@@ -31,6 +32,7 @@ public class RegisteredRenterView extends JFrame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 		getContentPane().setBackground(new Color(230, 230, 250));
+		setResizable(false);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int height = screenSize.height;
 		int width = screenSize.width;
@@ -60,6 +62,8 @@ public class RegisteredRenterView extends JFrame
 		emails.setMnemonic(KeyEvent.VK_S);
 		emails.add(inbox);
 		inbox.setActionCommand("inbox");
+		emails.add(sendEmail);
+		sendEmail.setActionCommand("send email");
 		bar.add(emails);
 		
         setJMenuBar(bar);
@@ -73,7 +77,10 @@ public class RegisteredRenterView extends JFrame
 		matching.addActionListener(a);
 	}
 	
-	public void addEmailListener(ActionListener a) {
+	public void addInboxListener(ActionListener a) {
 		inbox.addActionListener(a);
+	}
+	public void addSendEmailListener(ActionListener a) {
+		sendEmail.addActionListener(a);
 	}
 }

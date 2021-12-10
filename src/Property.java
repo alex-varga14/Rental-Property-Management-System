@@ -64,13 +64,13 @@ public class Property
 	private String quadrant;
 	private PropertyFees information;
 	private ListingState state;
+	private String lanlordEmail;
 	
 	public Property(String type, String a, int nBath, int nBed, boolean furnished, String quad)
 	{
 		for(PropertyTypes t : PropertyTypes.values())
 		{
 			String property = t.name();
-			System.out.println(type);
 			if(propertyGeneralization(type.strip().toUpperCase()).equals(property))
 				{
 					this.typeOfProperty = property.toString();
@@ -83,30 +83,7 @@ public class Property
 		this.setNumberOfBedrooms(nBed);
 		this.setFurnished(furnished);
 		this.setQuadrant(quad);
-		System.out.println(typeOfProperty);
 	}
-	
-	
-//	public Property(String type, String a, int nBath, int nBed, boolean furnished, String quad)
-//	{
-//		for(PropertyTypes t : PropertyTypes.values())
-//		{
-//			String property = t.name();
-//			System.out.println(type);
-//			if(propertyGeneralization(type.strip().toUpperCase()).equals(property))
-//				{
-//					this.typeOfProperty = property.toString();
-//					break;
-//				}
-//		}
-//		this.setTypeOfProperty(type);
-//		this.setAddress(a);
-//		this.setNumberOfBathrooms(nBath);
-//		this.setNumberOfBedrooms(nBed);
-//		this.setFurnished(furnished);
-//		this.setQuadrant(quad);
-//		System.out.println(typeOfProperty);
-//	}
 	
 	public String propertyGeneralization(String t)
 	{
@@ -189,6 +166,14 @@ public class Property
 
 	public void setState(ListingState state) {
 		this.state = state;
+	}
+
+	public String getLanlordEmail() {
+		return lanlordEmail;
+	}
+
+	public void setLanlordEmail(String lanlordEmail) {
+		this.lanlordEmail = lanlordEmail;
 	}
 	
 }
