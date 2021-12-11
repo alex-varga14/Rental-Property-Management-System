@@ -5,10 +5,10 @@ This application allows for renters to view and email about properties, lanlords
 ## MySQL
 - Allows users to create a database connection with the defined .sql file.
 ---
-## Starting the program with the .jar 
-To run, fork and reach the main source path and run the command:
-`java -jar RPMS.jar <username> <password>`
-where <username> and <password> are the designated fields for the MySQL connection
+## Starting the program with the .jar
+-To run, fork and reach the main source path and run the command:
+-`java -jar RPMS.jar <username> <password>`
+-where <username> and <password> are the designated fields for the MySQL connection
 ---
 ## Challenges I ran into
 - This was meant to be a group project but I took the workload on myself. It was tedious but worth while.
