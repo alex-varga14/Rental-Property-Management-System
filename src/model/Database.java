@@ -189,11 +189,11 @@ public class Database
 	//function to query database for manager summary report
 	public String[][] getAllPropertiesManagerSummary()
 	{
-		String[][] propertyData = new String[numberOfProperties()][];
+		String[][] propertyData = new String[numberOfRentedProperties()][];
 		ResultSet rs;
 		try {
 			Statement stmt = dbConnect.createStatement();
-			String query = "SELECT * FROM listedproperties";
+			String query = "SELECT * FROM listedproperties where stateoflisting='RENTED'";
 			rs = stmt.executeQuery(query);
 			int i = 0;
 			while(rs.next()) {
