@@ -3,18 +3,21 @@ import java.awt.event.*;
 
 import view.ErrorView;
 
+//Controller class for Invalid login input
 public class ErrorController implements ActionListener
 {
 	private ErrorView errorView;
+	private LoginController loginController;
+	private SignUpController signUpController;
 	
 	public ErrorController()
 	{
 		errorView = new ErrorView();
 		errorView.setVisible(true);
-		addListenersToClass();
+		addListenersToView();
 	}
 	
-	private void addListenersToClass()
+	private void addListenersToView()
 	{
 		errorView.addTryAgainListener(this);
 		errorView.addSignUpListener(this);
@@ -24,12 +27,11 @@ public class ErrorController implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("try again")) {
 			errorView.setVisible(false);
-			LoginController loginController = new LoginController();
+			loginController = new LoginController();
 		}
 		if(e.getActionCommand().equals("sign up")) {
 			errorView.setVisible(false);
-			SignUpController signUpController = new SignUpController();
+			signUpController = new SignUpController();
 		}
 	}
-
 }

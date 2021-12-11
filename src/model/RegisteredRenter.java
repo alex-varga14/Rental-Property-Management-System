@@ -1,19 +1,25 @@
 package model;
 import java.util.ArrayList;
 
+//Registered Renter Model
+//Singleton Design Pattern
 public class RegisteredRenter 
 {
-	public ArrayList<PropertyListings> favouritedProperties;
+	//Fields to hold matched properties, email and password
+	public ArrayList<Property> favouritedProperties;
 	private static RegisteredRenter instance;
 	private String emailAddress;
 	private String password;
 	
+	//Initial RR ctor for sign up
 	public RegisteredRenter(String emailAddress, String password) {
 		this.setEmailAddress(emailAddress);
 		this.setPassword(password);
 	}
+	//default ctor for once signed up
 	public RegisteredRenter() {}
 	
+	//Initial sign up RegisteredRenter Instance
 	public static RegisteredRenter getInstance(String emailAddress, String password)
 	{
 		if(instance == null) 
@@ -23,6 +29,7 @@ public class RegisteredRenter
 		return instance;
 	}
 	
+	//get RegisteredRenter instance once signed up
 	public static RegisteredRenter getInstance()
 	{
 		if(instance == null) 
@@ -32,6 +39,7 @@ public class RegisteredRenter
 		return instance;
 	}
 	
+	//Simple getters and setters for functionality
 	public String getEmailAddress() {
 		return emailAddress;
 	}
@@ -47,26 +55,4 @@ public class RegisteredRenter
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	/*
-	public void update(ArrayList<PropertyListings> in)
-	{
-		favouritedProperties.clear();
-	        for(int i = 0; i < in.size(); i++)
-	        {
-	        	favouritedProperties.add(in.get(i));
-	        }
-	        display();
-	}
-	
-	 public void display()
-	    {
-	        System.out.println();
-	        System.out.println("Interested In properties:");
-	        for(int i = 0; i < favouritedProperties.size(); i++)
-	        {
-	            System.out.print(favouritedProperties.get(i) + " ");
-	        }
-	    } */
-
 }

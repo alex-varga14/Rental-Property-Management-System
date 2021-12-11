@@ -11,6 +11,7 @@ public class RegPropertyController implements ActionListener
 	private RegPropertyView theView;
 	private Lanlord currentLanlord = Lanlord.getInstance();
 	private Property currentProperty;
+	private PropertyFeesController feeController;
 	
 	public RegPropertyController()
 	{
@@ -31,7 +32,7 @@ public class RegPropertyController implements ActionListener
 			theView.setVisible(false);
 			currentProperty = currentLanlord.registerProperty(theView.getPropertyBox(), theView.getAddressField(), theView.getBathroomsBox(), theView.getBedroomsBox()
 					, theView.getFurnishedBox(), theView.getQuadrantBox(), currentLanlord.getEmailAddress());
-			PropertyFeesController feeController = new PropertyFeesController(currentProperty);
+			feeController = new PropertyFeesController(currentProperty);
 		}
 		
 	}

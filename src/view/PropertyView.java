@@ -112,20 +112,63 @@ public class PropertyView extends JFrame
 		    	getContentPane().repaint();
 			}
 		});
-		
-//		propertyTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-//			@Override
-//			public void valueChanged(ListSelectionEvent e)
-//			{
-//				if(propertyTable.getSelectedRow() > -1)
-//				{
-//					System.out.println(propertyTable.getValueAt(propertyTable.getSelectedRow(),  0).toString());
-//					//EmailController n = new EmailController("send");
-//				}
-//			}
-//		});
-		
 	}
+	
+	public PropertyView(boolean[] flags,  String type, int beds, int baths, int furn, String quad) {
+		setTitle("Master Rental Property Management - Listed Properties");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setBackground(Color.white);
+		getContentPane().setLayout(null);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int height = screenSize.height;
+		int width = screenSize.width;
+		setSize(width/2, height/2);
+		setLocationRelativeTo(null);
+		setIconImage(img.getImage());
+		populateData(flags, type,beds, baths, furn, quad);
+		propertyTable = new JTable(dataa, columnNames);
+		propertyTable.setDefaultEditor(Object.class, null);
+		
+		emailButton.setBounds(180, 360, 300, 30);
+		emailButton.setActionCommand("email");
+		
+		changeStateButton.setBounds(180, 360, 300, 30);
+		changeStateButton.setActionCommand("state");
+		
+		
+		
+		JScrollPane sp = new JScrollPane(propertyTable);
+		sp.setBounds(00, 00, width/2 - 10, 200);
+		getContentPane().add(sp);
+		
+		propertyTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		propertyTable.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				if(Lanlord.getInstance().getEmailAddress() != null) {
+					getContentPane().add(changeStateButton);
+					System.out.println("Lanlord");
+					ID = propertyTable.getValueAt(propertyTable.getSelectedRow(),  0).toString();
+					selected = propertyTable.getValueAt(propertyTable.getSelectedRow(),  7).toString();
+				}
+				else if(Manager.getInstance().getEmailAddress() != null) {
+					getContentPane().add(changeStateButton);
+					System.out.println("Manager");
+					ID = propertyTable.getValueAt(propertyTable.getSelectedRow(),  0).toString();
+					selected = propertyTable.getValueAt(propertyTable.getSelectedRow(),  7).toString();
+				}
+				else {
+					getContentPane().add(emailButton);
+					ID = propertyTable.getValueAt(propertyTable.getSelectedRow(),  0).toString();
+					System.out.println("Renter");
+				}
+		    	getContentPane().repaint();
+			}
+		});
+	}
+	
 	public void addEmailListener(ActionListener a)  {
 		emailButton.addActionListener(a);
 	}
@@ -144,168 +187,179 @@ public class PropertyView extends JFrame
 		return ID;
 	}
 	
-	/*
-	public void populateData(String type, int nBath, int nBed, boolean furn, String quad)
+	public void populateData(boolean[] flags,  String type, int beds, int baths, int furn, String quad)
 	{
 		Database access = Database.getInstance();
 		access.getConnection();
-		if(Lanlord.getInstance().getEmailAddress() != null)
+		if((flags[0] == false) && (flags[1] == false) &&(flags[2] == false) &&(flags[3] == false) &&(flags[4] == false))
 		{
-			dataa = access.getAllLanlordProperties(Lanlord.getInstance().getEmailAddress());
-			//propertyTable.getColumn(0).setEditable(false);
+			populateData();
 		}
-		else
+		else if (flags[0] == true)
 		{
-			if(!type.equals(""))
+			System.out.println("In spin");
+			if(flags[1] == true)
 			{
-				typeFilter = true;
-			}
-			if(!String.valueOf(nBath).equals(""))
+				if(flags[2] == true)
+				{
+					if(flags[3] == true)
+					{
+						if(flags[4] == true)
+						{
+							System.out.println("In all true");
+							dataa = access.getAllFilteredProperties(type, beds, baths, furn, quad);
+						}
+						else
+						{
+							dataa = access.getAllFilteredProperties1(type, beds, baths, furn);
+						}
+					} 
+					else if(flags[4] == true)
+					{
+						dataa = access.getAllFilteredProperties2(type, beds, baths, quad);
+					}
+					else
+					{
+						dataa = access.getAllFilteredProperties3(type, beds, baths);
+					}	
+				}
+				else if (flags[3] == true)
+				{
+					if(flags[4] == true)
+					{
+						dataa = access.getAllFilteredProperties4(type, beds, furn, quad);
+					}
+					else
+					{
+						dataa = access.getAllFilteredProperties5(type, beds, furn);
+					}
+				} 
+				else if(flags[4] == true)
+				{
+					dataa = access.getAllFilteredProperties6(type, beds, quad);
+				}
+				else
+				{
+					dataa = access.getAllFilteredProperties7(type, beds);
+				}	
+			} 
+			else if (flags[2] == true)
 			{
-				bathFilter = true;
+				if(flags[3] == true)
+				{
+					dataa = access.getAllFilteredProperties8(type, baths, furn);
+				}
+				else if(flags[4] == true)
+				{
+					dataa = access.getAllFilteredProperties9(type, baths, quad);
+				}
+				else
+				{
+					dataa = access.getAllFilteredProperties10(type, baths);
+				}
 			}
-			if(!String.valueOf(nBed).equals(""))
+			else if(flags[3] == true)
 			{
-				bedFilter = true;
+				if(flags[4] == true)
+				{
+					dataa = access.getAllFilteredProperties11(type, furn, quad);
+				}
+				else
+				{
+					dataa = access.getAllFilteredProperties12(type, furn);
+				}
 			}
-			if(!String.valueOf(furn).equals(""))
+			else if(flags[4] == true)
 			{
-				furnFilter = true;
+				dataa = access.getAllFilteredProperties13(type, quad);
 			}
-			if(!quad.equals(""))
-			{
-				quadFilter = true;
-			}
-			//determine which search algo to use
-			//all filters set
-			if( (typeFilter == true) && (bathFilter == true) && (bedFilter == true) && (furnFilter == true) && (quadFilter == true))
-			{
-				
-			}
-			//everything except type true
-			else if( (typeFilter == false) && (bathFilter == true) && (bedFilter == true) && (furnFilter == true) && (quadFilter == true))
-			{
-				
-			}
-			//bed furn and quad true
-			else if( (typeFilter == false) && (bathFilter == false) && (bedFilter == true) && (furnFilter == true) && (quadFilter == true))
-			{
-				
-			}
-			//furn and quad true
-			else if( (typeFilter == false) && (bathFilter == false) && (bedFilter == false) && (furnFilter == true) && (quadFilter == true))
-			{
-				
-			}
-			//quad true
-			else if( (typeFilter == false) && (bathFilter == false) && (bedFilter == false) && (furnFilter == false) && (quadFilter == true))
-			{
-				
-			}
-			//all false
-			else if( (typeFilter == false) && (bathFilter == false) && (bedFilter == false) && (furnFilter == false) && (quadFilter == false))
-			{
-				dataa = access.getAllProperties();
-			}
-			//type true, 
-			else if( (typeFilter == true) && (bathFilter == false) && (bedFilter == false) && (furnFilter == false) && (quadFilter == false))
-			{
-				
-			}
-			//type true, bath true
-			else if( (typeFilter == true) && (bathFilter == true) && (bedFilter == false) && (furnFilter == false) && (quadFilter == false))
-			{
-				
-			}
-			//type true, bed true
-			else if( (typeFilter == true) && (bathFilter == false) && (bedFilter == true) && (furnFilter == false) && (quadFilter == false))
-			{
-				
-			}
-			//type true, furn true
-			else if( (typeFilter == true) && (bathFilter == false) && (bedFilter == false) && (furnFilter == true) && (quadFilter == false))
-			{
-				
-			}
-			//type true, quad true
-			else if( (typeFilter == true) && (bathFilter == false) && (bedFilter == false) && (furnFilter == false) && (quadFilter == true))
-			{
-				
-			}
-			//bath true, 
-			else if( (typeFilter == false) && (bathFilter == true) && (bedFilter == false) && (furnFilter == false) && (quadFilter == false))
-			{
-				
-			}
-			//bath and bed true, 
-			else if( (typeFilter == false) && (bathFilter == true) && (bedFilter == true) && (furnFilter == false) && (quadFilter == false))
-			{
-				
-			}
-			//bath and furn true, 
-			else if( (typeFilter == false) && (bathFilter == true) && (bedFilter == false) && (furnFilter == true) && (quadFilter == false))
-			{
-				
-			}
-			//bath and quad true, 
-			else if( (typeFilter == false) && (bathFilter == true) && (bedFilter == false) && (furnFilter == false) && (quadFilter == true))
-			{
-				
-			}
-			//bed true, 
-			else if( (typeFilter == false) && (bathFilter == false) && (bedFilter == true) && (furnFilter == false) && (quadFilter == false))
-			{
-				
-			}
-			//bed and funished true, 
-			else if( (typeFilter == false) && (bathFilter == false) && (bedFilter == true) && (furnFilter == true) && (quadFilter == false))
-			{
-				
-			}
-			//bed and quadrant true, 
-			else if( (typeFilter == false) && (bathFilter == false) && (bedFilter == true) && (furnFilter == false) && (quadFilter == true))
-			{
-				
-			}
-			//furn true, 
-			else if( (typeFilter == false) && (bathFilter == false) && (bedFilter == false) && (furnFilter == true) && (quadFilter == false))
-			{
-				
-			}
-			//type, furn quad true, 
-			else if( (typeFilter == true) && (bathFilter == false) && (bedFilter == false) && (furnFilter == true) && (quadFilter == true))
-			{
-				
-			}
-			//type, bath quad true, 
-			else if( (typeFilter == true) && (bathFilter == true) && (bedFilter == false) && (furnFilter == false) && (quadFilter == true))
-			{
-				
-			}
-			//everything except bath
-			else if( (typeFilter == true) && (bathFilter == false) && (bedFilter == true) && (furnFilter == true) && (quadFilter == true))
-			{
-				
-			}
-			//everything except bed
-			else if( (typeFilter == true) && (bathFilter == true) && (bedFilter == false) && (furnFilter == true) && (quadFilter == true))
-			{
-				
-			}
-			//everything except furn
-			else if( (typeFilter == true) && (bathFilter == true) && (bedFilter == true) && (furnFilter == false) && (quadFilter == true))
-			{
-				
-			}
-			//everything except quad
-			else if( (typeFilter == true) && (bathFilter == true) && (bedFilter == true) && (furnFilter == true) && (quadFilter == false))
-			{
-				
-			}
-			
-			propertyTable.setDefaultEditor(Object.class, null);
+			else ;
 		}
-	} */
+		else if(flags[1] == true)
+		{
+			if(flags[2] == true)
+			{
+				if(flags[3] == true) 
+				{
+					if(flags[4] == true)
+					{
+						dataa = access.getAllFilteredProperties14(beds, baths, furn, quad);
+					}
+					else
+					{
+						dataa = access.getAllFilteredProperties15(beds, baths, furn);
+					}
+				}
+				else if(flags[4] == true)
+				{
+					dataa = access.getAllFilteredProperties16(beds, baths, quad);
+				}
+				else
+				{
+					System.out.println("Guuy");
+					dataa = access.getAllFilteredProperties17(beds, baths);
+				}
+			}
+			else if(flags[3] == true)
+			{
+				if(flags[4] == true)
+				{
+					dataa = access.getAllFilteredProperties18(beds, furn, quad);
+				}
+				else
+				{
+					dataa = access.getAllFilteredProperties19(beds, furn);
+				}
+			}
+			else if (flags[4] == true)
+			{
+				dataa = access.getAllFilteredProperties20(beds, quad);
+			}
+			else
+			{
+				dataa = access.getAllFilteredProperties21(beds);
+			}
+		}
+		else if(flags[2] == true)
+		{
+			if(flags[3] == true)
+			{
+				if(flags[4] == true)
+				{
+					dataa = access.getAllFilteredProperties22(baths, furn, quad);
+				}
+				else
+				{
+					dataa = access.getAllFilteredProperties23(baths, furn);
+				}
+			}
+			else if(flags[4] == true)
+			{
+				dataa = access.getAllFilteredProperties24(baths, quad);
+			}
+			else 
+			{
+				dataa = access.getAllFilteredProperties25(baths);
+			}
+		}
+		else if(flags[3] == true)
+		{
+			if(flags[4]== true)
+			{
+				dataa = access.getAllFilteredProperties26(furn, quad);
+			}
+			else
+			{
+				dataa = access.getAllFilteredProperties27(furn);
+			}
+		}
+		else if(flags[4] == true)
+		{
+			dataa = access.getAllFilteredProperties28(quad);
+		}
+		
+		//propertyTable.setDefaultEditor(Object.class, null);
+	} 
 	
 	public void populateData()
 	{

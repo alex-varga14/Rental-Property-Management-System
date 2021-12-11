@@ -8,10 +8,15 @@ import model.Manager;
 import model.RegisteredRenter;
 import view.LoginView;
 
+//Controller class for the Login implementations 
 public class LoginController implements ActionListener
 {
 	private LoginView loginView;
 	private String loginType;
+	private ErrorController errorController;
+	private RegisteredRenterController registeredRenter;
+	private LanlordController lanlord;
+	private ManagerController manager;
 	
 	public LoginController()
 	{
@@ -25,6 +30,7 @@ public class LoginController implements ActionListener
 		loginView.addLoginListener(this);
 	}
 
+	//ActionListenrs to determine what action to perform and what user to singleton instantiate
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -36,7 +42,7 @@ public class LoginController implements ActionListener
 			loginType = access.findUser(loginView.getEmail(), loginView.getPassword());
 			if(loginType.equals(""))
 			{
-				ErrorController errorController = new ErrorController();
+				errorController = new ErrorController();
 			}
 			if(loginType.equals("Lanlord"))
 			{
@@ -52,23 +58,21 @@ public class LoginController implements ActionListener
 			}
 			homeScreen(loginType);
 		}
-		
 	}
-	
+	//Function to send specific user to set homepage
 	private void homeScreen(String login)
 	{
 		switch(login)
 		{
 		case "Registered Renter":
-			RegisteredRenterController registeredRenter = new RegisteredRenterController();
+			registeredRenter = new RegisteredRenterController();
 			break;
 		case "Lanlord":
-			LanlordController lanlord = new LanlordController();
+			lanlord = new LanlordController();
 			break;
 		case "Manager":
-			ManagerController manager = new ManagerController();
+			manager = new ManagerController();
 			break;
 		}
 	}
-
 }

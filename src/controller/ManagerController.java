@@ -3,9 +3,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import view.ManagerView;
 
+//Controller class for the Manager users
 public class ManagerController implements ActionListener
 {
 	private ManagerView theView;
+	private PropertyController propertyController;
+	private InformationController InfoController;
+	private ChangeFeeController feeController;
+	private ChangePeriodController periodController;
+	private SummaryController summaryController;
 	
 	public ManagerController()
 	{
@@ -23,38 +29,39 @@ public class ManagerController implements ActionListener
 		theView.addViewLanlordsListener(this);
 		theView.addPropertyInfoListener(this);
 		theView.addSummaryListener(this);
-		
 	}
 
+	//ActionListeners for viewing listed properties, changing fees/period, viewing renters, lanlords or properties
+	//and requesting summary
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("view listed")) {
 			theView.setVisible(false);
-			PropertyController propertyController = new PropertyController();
+			propertyController = new PropertyController();
 		}
 		if(e.getActionCommand().equals("change fees")) {
 			theView.setVisible(false);
-			ChangeFeeController feeController = new ChangeFeeController();
+			feeController = new ChangeFeeController();
 		}
 		if(e.getActionCommand().equals("change period")) {
 			theView.setVisible(false);
-			ChangePeriodController feeController = new ChangePeriodController();
+			periodController = new ChangePeriodController();
 		}
 		if(e.getActionCommand().equals("view renters")) {
 			theView.setVisible(false);
-			InformationController renterInfoController = new InformationController("Registered Renter");
+			InfoController = new InformationController("Registered Renter");
 		}
 		if(e.getActionCommand().equals("view lanlords")) {
 			theView.setVisible(false);
-			InformationController lanlordInfoController = new InformationController("Lanlord");
+			InfoController = new InformationController("Lanlord");
 		}
 		if(e.getActionCommand().equals("view property info")) {
 			theView.setVisible(false);
-			InformationController propertyInfoController = new InformationController("Property");
+			InfoController = new InformationController("Property");
 		}
 		if(e.getActionCommand().equals("view summary")) {
 			theView.setVisible(false);
-			SummaryController summaryController = new SummaryController();
+			summaryController = new SummaryController();
 		}
 		
 	}

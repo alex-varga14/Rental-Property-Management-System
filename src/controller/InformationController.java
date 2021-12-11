@@ -3,6 +3,7 @@ import java.awt.event.*;
 
 import view.InformationView;
 
+//Controller class for Manager Information Access 
 public class InformationController implements ActionListener
 {
 	private InformationView theView;
@@ -11,12 +12,6 @@ public class InformationController implements ActionListener
 	{
 		theView = new InformationView(infoType);
 		theView.setVisible(true);
-		addListenersToView();
-	}
-	
-	public void addListenersToView()
-	{
-		//theView.addViewPropertyListener(this);
 	}
 
 	@Override
@@ -24,5 +19,4 @@ public class InformationController implements ActionListener
 		// TODO Auto-generated method stub
 		
 	}
-	
 }

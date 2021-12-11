@@ -2,8 +2,9 @@ package Client;
 
 import controller.ClientController;
 
-public class Client {
-	
+//Client class to start RPMS application
+public class Client 
+{
 	public static void main(String [] args) 
 	{
 		ClientController theController = new ClientController();

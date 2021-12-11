@@ -1,7 +1,10 @@
 package model;
 
+
+//Property Model
 public class Property 
 {
+	//Fields for all required property data
 	private String typeOfProperty;
 	private String address;
 	private int numberOfBathrooms;
@@ -12,6 +15,7 @@ public class Property
 	private ListingState state;
 	private String lanlordEmail;
 	
+	//CTOR to instantiate a property
 	public Property(String type, String a, int nBath, int nBed, boolean furnished, String quad)
 	{
 		for(PropertyTypes t : PropertyTypes.values())
@@ -31,6 +35,7 @@ public class Property
 		this.setQuadrant(quad);
 	}
 	
+	//Simple function to format ENUM property Type into proper valid strings
 	public String propertyGeneralization(String t)
 	{
 		StringBuilder tmp = new StringBuilder();
@@ -47,6 +52,7 @@ public class Property
 		return tmp.toString();
 	}
 	
+	//Functional getters and setters
 	public void setTypeOfProperty(String type)
 	{
 		typeOfProperty = type;
@@ -121,6 +127,5 @@ public class Property
 	public void setLanlordEmail(String lanlordEmail) {
 		this.lanlordEmail = lanlordEmail;
 	}
-	
 }
 

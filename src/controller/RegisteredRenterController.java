@@ -6,10 +6,12 @@ import javax.swing.ImageIcon;
 
 import view.RegisteredRenterView;
 
+//Controller class for the Registered Renters users
 public class RegisteredRenterController implements ActionListener
 {
-
 	private RegisteredRenterView theView;
+	private SearchController searchController;
+	private EmailController sendEmail;
 	
 	public RegisteredRenterController()
 	{
@@ -26,11 +28,12 @@ public class RegisteredRenterController implements ActionListener
 		theView.addMatchesListener(this);
 	}
 
+	//Action commands for searching properties, viewing matched properties, inbox, and send email
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("search")) {
 			theView.setVisible(false);
-			SearchController searchController = new SearchController();
+			searchController = new SearchController();
 		}
 		if(e.getActionCommand().equals("matched")) {
 			theView.setVisible(false);
@@ -38,12 +41,11 @@ public class RegisteredRenterController implements ActionListener
 		}
 		if(e.getActionCommand().equals("inbox")) {
 			theView.setVisible(false);
-			EmailController sendEmail = new EmailController("inbox");
+			sendEmail = new EmailController("inbox");
 		}
 		if(e.getActionCommand().equals("send email")) {
 			theView.setVisible(false);
-			EmailController sendEmail = new EmailController("send");
+			sendEmail = new EmailController("send");
 		}
-		
 	}
 }

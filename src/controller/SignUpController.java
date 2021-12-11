@@ -9,8 +9,10 @@ import model.Manager;
 import model.RegisteredRenter;
 import view.SignUpView;
 
+//Sign up controller for new users signing up
 public class SignUpController implements ActionListener
 {
+	//declares types of users
 	private SignUpView theView;
 	private Lanlord l;
 	private Manager m;
@@ -23,12 +25,12 @@ public class SignUpController implements ActionListener
 		theView.setVisible(true);
 	}
 	
-	
 	public void addListenersToView()
 	{
 		theView.addSignUpListener(this);
 	}
 
+	//Action commands for signing up user and their desginated functionalities
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		

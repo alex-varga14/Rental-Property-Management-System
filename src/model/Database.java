@@ -480,33 +480,893 @@ public class Database
 		return count;
 	}
 	
-//	public static boolean sendMail(String message, User sender, User receiver) {
-//    	String query = "INSERT INTO mail (sender, receiver, message) VALUES (?,?,?)";
-//    	try {
-//			PreparedStatement stm = databaseConnection.prepareStatement(query);
-//			
-//			stm.setString(1, sender.getUsername());
-//			System.out.println(sender.getUsername());
-//			System.out.println(receiver.getUsername());
-//			stm.setString(2, receiver.getUsername());
-//			stm.setString(3, message);
-//			
-//			int rowCount = stm.executeUpdate();
-//			stm.close();
-//			
-//			DatabaseConnectivity.updateListOfUsers();
-//			if(rowCount > 0) {			
-//				return true;
-//			}
-//			else {
-//				return false;
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			System.err.println("Error sending mail to DB");
-//			return false;
-//		}
-//    }
+	//Below on is a really shitty filter search implementation
+	//could have probably used an interface to determine which filters active
+	//instead made like 27 of the same functions
+	//fix later
+	
+	public String[][] getAllFilteredProperties(String type, int beds, int baths, int furn, String quad)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE type= '"+ type + "' AND numberofBedrooms='" + beds + "'"
+					+ "AND numberOfBaths='"+ baths + "' AND furnished='"+ furn + "' AND quadrant='"+ quad+"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties1(String type, int beds, int baths, int furn)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE type= '"+ type + "' AND numberofBedrooms='" + beds + "'"
+					+ "AND numberOfBaths='"+ baths + "' AND furnished='"+ furn + "'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties2(String type, int beds, int baths, String quad)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE type= '"+ type + "' AND numberofBedrooms='" + beds + "'"
+					+ "AND numberOfBaths='"+ baths + " AND quadrant='"+ quad+"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties3(String type, int beds, int baths)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE type= '"+ type + "' AND numberofBedrooms='" + beds + "'"
+					+ "AND numberOfBaths='"+ baths + "'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties4(String type, int beds,  int furn, String quad)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE type= '"+ type + "' AND numberofBedrooms='" + beds + "' AND furnished='"+ furn + "' AND quadrant='"+ quad+"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties5(String type, int beds, int furn)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE type= '"+ type + "' AND numberofBedrooms='" + beds + "' AND furnished='"+ furn + "'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties6(String type, int beds, String quad)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE type= '"+ type + "' AND numberofBedrooms='" + beds + "' AND quadrant='"+ quad+"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties7(String type, int beds)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE type= '"+ type + "' AND numberofBedrooms='" + beds + "'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties8(String type, int baths, int furn)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE type= '"+ type  + "'"
+					+ "AND numberOfBaths='"+ baths + "' AND furnished='" + furn + "'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties9(String type, int baths,  String quad)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE type= '"+ type  + "'"
+					+ "AND numberOfBaths='"+ baths + "' AND quadrant='"+  quad +"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties10(String type, int baths)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE type= '"+ type + "'"
+					+ "AND numberOfBaths='"+ baths + "'" ;
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties11(String type, int furn, String quad)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE type= '"+ type + "' AND furnished='"+ furn + "' AND quadrant='"+ quad+"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties12(String type, int furn)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE type= '"+ type +  "' AND furnished='"+ furn + "'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties13(String type, String quad)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE type= '"+ type +  "' AND quadrant='"+ quad+"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties14(int beds, int baths, int furn, String quad)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE numberofBedrooms='" + beds + "'"
+					+ "AND numberOfBaths='"+ baths + "' AND furnished='"+ furn + "' AND quadrant='"+ quad+"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties15(int beds, int baths, int furn)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE numberofBedrooms='" + beds + "'"
+					+ "AND numberOfBaths='"+ baths + "' AND furnished='"+ furn + "'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties16(int beds, int baths,  String quad)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE numberofBedrooms='" + beds + "'"
+					+ "AND numberOfBaths='"+ baths + "' AND quadrant='"+ quad+"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties17( int beds, int baths)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE numberofBedrooms='" + beds + "'"
+					+ "AND numberOfBaths='"+ baths + "'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties18(int beds, int furn, String quad)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE numberofBedrooms='" + beds +"' AND furnished='"+ furn + "' AND quadrant='"+ quad+"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties19(int beds, int furn)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE numberofBedrooms='" + beds + "' AND furnished='"+ furn +"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties20(int beds, String quad)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE numberofBedrooms='" + beds + "' AND quadrant='"+ quad+"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties21(int beds)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE numberofBedrooms='" + beds + "'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties22(int baths, int furn, String quad)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE numberOfBaths='"+ baths + "' AND furnished='"+ furn + "' AND quadrant='"+ quad+"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties23(int baths, int furn)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE numberOfBaths='"+ baths + "' AND furnished='"+ furn +"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties24(int baths, String quad)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE numberOfBaths='"+ baths + "' AND quadrant='"+ quad+"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties25(int baths)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE numberOfBaths='"+ baths + "'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties26(int furn, String quad)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE furnished='"+ furn + "' AND quadrant='"+ quad+"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties27(int furn)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE furnished='"+ furn +"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	public String[][] getAllFilteredProperties28(String quad)
+	{
+		ArrayList<String[]> stringList = new ArrayList<String[]>();
+		ResultSet rs;
+		try {
+			Statement stmt = dbConnect.createStatement();
+			String query = "SELECT * FROM listedproperties WHERE quadrant='"+ quad+"'";
+			rs = stmt.executeQuery(query);
+			
+			int i = 0;
+			while(rs.next()) {
+				stringList.add(new String[]{ rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
+						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
+								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") }) ;
+				i++;
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException i)
+		{
+			i.printStackTrace();
+		}
+		String[][] propertyData = new String[stringList.size()][];
+		for(int i = 0; i < stringList.size(); i++)
+		{
+			propertyData[i] = stringList.get(i);
+		}
+		return propertyData;
+	}
+	
+	
 
 }
 /*

@@ -9,14 +9,23 @@ import model.PropertyFees;
 import view.EmailView;
 import view.SendEmailView;
 
+//Controller class for the Email implementations for Lanlord and Renters
 public class EmailController implements ActionListener
 {
+	//add both the send email and inbox email view
 	private EmailView theView;
 	private SendEmailView theViewSend;
 	private String sendTo;
+	private LanlordController lanlord;
+	private RegisteredRenterController rr;
+	private ClientController client;
+	//get instance of database 
 	Database com = Database.getInstance();
 	
-	
+	//CTOR taking in email mode 
+	// 1. send
+	// 2. inbox
+	// ID for Renters interested in properties
 	public EmailController(String mode, String ID)
 	{
 		if(mode.equals("inbox"))
@@ -34,7 +43,7 @@ public class EmailController implements ActionListener
 			theViewSend.setVisible(true);
 		}
 	}
-	
+	//Overloaded CTOR for Lanlord access, will not be interested in property therefore no ID argument required
 	public EmailController(String mode)
 	{
 		if(mode.equals("inbox"))
@@ -68,21 +77,21 @@ public class EmailController implements ActionListener
 			com.getConnection();
 			if(Lanlord.getInstance().getEmailAddress() != null) {
 				com.sendEmail(Lanlord.getInstance().getEmailAddress(), sendTo, theViewSend.getBody());
-				LanlordController client = new LanlordController();
+				lanlord  = new LanlordController();
 			}
 			else if (RegisteredRenter.getInstance().getEmailAddress() != null){
 				com.sendEmail(RegisteredRenter.getInstance().getEmailAddress(), sendTo, theViewSend.getBody());
-				RegisteredRenterController client = new RegisteredRenterController();
+				rr = new RegisteredRenterController();
 			}
 			else
 			{
 				com.sendEmail("Guest Renter", sendTo, theViewSend.getBody());
-				ClientController client = new ClientController();
+				client = new ClientController();
 			}
 		}
 		if(e.getActionCommand().equals("home")) {
 			theView.setVisible(false);
-			LanlordController client = new LanlordController();
+			lanlord = new LanlordController();
 		}
 	}
 	

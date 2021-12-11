@@ -16,6 +16,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import model.Lanlord;
+
 public class LanlordView extends JFrame
 {
 	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");

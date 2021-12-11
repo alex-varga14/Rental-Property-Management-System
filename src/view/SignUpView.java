@@ -15,7 +15,6 @@ import javax.swing.JTextField;
 
 public class SignUpView extends JFrame
 {
-	
 	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	private JTextField emailInput;
 	String[] optionsToChoose = {"Manager", "Lanlord", "Registered Renter"};

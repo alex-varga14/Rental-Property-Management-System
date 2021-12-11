@@ -91,14 +91,16 @@ public class SearchView extends JFrame
 		return propertyComboBox.getSelectedItem().toString();
 	}
 	
-	public int getBedroomsBox()
+	public String getBedroomsBox()
 	{
-		return Integer.parseInt(bedroomsComboBox.getSelectedItem().toString());
+		//return Integer.parseInt(bedroomsComboBox.getSelectedItem().toString());
+		return bedroomsComboBox.getSelectedItem().toString();
 	}
 	
-	public int getBathroomsBox()
+	public String getBathroomsBox()
 	{
-		return Integer.parseInt(bathroomsComboBox.getSelectedItem().toString());
+		//return Integer.parseInt(bathroomsComboBox.getSelectedItem().toString());
+		return bathroomsComboBox.getSelectedItem().toString();
 	}
 
 	public boolean getFurnishedBox()

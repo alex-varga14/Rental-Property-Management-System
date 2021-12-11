@@ -3,10 +3,16 @@ import java.awt.event.*;
 
 import view.ClientView;
 
+//Main controller of the application, essentially the homescreen controller
 public class ClientController implements ActionListener
 {
+	//The Client View associated with the controller
 	private ClientView theView;
+	private SearchController searchController;
+	private LoginController loginController;
+	private SignUpController signUpController;
 	
+	//Ctor, initialize new view, set it visible and add its listeners to the controller
 	public ClientController()
 	{
 		theView = new ClientView();
@@ -14,7 +20,7 @@ public class ClientController implements ActionListener
 		theView.setVisible(true);
 	}
 	
-	
+	//Function to add all listeners to view
 	public void addListenersToView()
 	{
 		theView.addStartListener(this);
@@ -22,19 +28,20 @@ public class ClientController implements ActionListener
 		theView.addSignUpListener(this);
 	}
 
+	//ActionListener commands
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("view properties")) {
 			theView.setVisible(false);
-			SearchController searchController = new SearchController();
+			searchController = new SearchController();
 		}
 		if(e.getActionCommand().equals("sign in")) {
 			theView.setVisible(false);
-			LoginController loginController = new LoginController();
+			loginController = new LoginController();
 		}
 		if(e.getActionCommand().equals("sign up")) {
 			theView.setVisible(false);
-			SignUpController signUpController = new SignUpController();
+			signUpController = new SignUpController();
 		}
 	}
 }

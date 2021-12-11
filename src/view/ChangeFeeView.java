@@ -11,14 +11,19 @@ import javax.swing.JTextField;
 
 import model.PropertyFees;
 
+//Change Fee View
 public class ChangeFeeView extends JFrame
 {
-	
+	//Company Logo
 	 ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
+	 //Buttons for commands
 	 JButton enterButton = new JButton("Change Fee");
 	 JButton signUpButton = new JButton("Cancel Change");
+	 //textfield to store new fee
 	 JTextField newFee = new JTextField();
 	 
+	 
+	 //CTOR to set up JFRAME
 	 public ChangeFeeView() {
 		setTitle("Master Rental Property Management - Modify Property Fee's");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,7 +49,6 @@ public class ChangeFeeView extends JFrame
     	getContentPane().add(newFee);
     	newFee.setColumns(10);
 		 
-  	
 	   	enterButton.setBounds(70, 100, 120, 30);
 	   	getContentPane().add(enterButton);
 	   	enterButton.setActionCommand("change fee");
@@ -54,13 +58,14 @@ public class ChangeFeeView extends JFrame
 	   	signUpButton.setActionCommand("cancel");
 	 }
 	 
+	 //ActionListeners for both buttons, linked to ChangeFee Controller
 	 public void addChangeFeeListener(ActionListener a)  {
 	    	enterButton.addActionListener(a);
 	 }
 	 public void addCancelListener(ActionListener a)  {
 		    signUpButton.addActionListener(a);
 	 }
-	 
+	 //Getter to get contents of TextField
 	 public String getNewFeeField()
 	 {
 			return newFee.getText();

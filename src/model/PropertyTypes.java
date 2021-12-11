@@ -1,5 +1,6 @@
 package model;
-
+//Stand Alone Enum for all Property Types
+//has toString abstract function
 public enum PropertyTypes {
 	APARTMENT {
 		public String toString() {

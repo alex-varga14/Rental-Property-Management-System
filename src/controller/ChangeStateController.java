@@ -10,6 +10,9 @@ public class ChangeStateController implements ActionListener
 {
 	private ChangeStateView theView;
 	private String propID;
+	private LanlordController lanlordController;
+	private ManagerController managerController;
+	
 	
 	public ChangeStateController(String propID, String state)
 	{
@@ -39,18 +42,18 @@ public class ChangeStateController implements ActionListener
 			}
 			else if(Manager.getInstance().getEmailAddress() != null)
 			{
-				ManagerController searchController = new ManagerController();
+				managerController = new ManagerController();
 			}
 			
 		}
 		if(e.getActionCommand().equals("cancel")) {
 			theView.setVisible(false);
 			if(Lanlord.getInstance().getEmailAddress() != null) {
-				LanlordController lanlordController = new LanlordController();
+				lanlordController = new LanlordController();
 			}
 			else if(Manager.getInstance().getEmailAddress() != null)
 			{
-				ManagerController searchController = new ManagerController();
+				managerController = new ManagerController();
 			}
 		}
 	}

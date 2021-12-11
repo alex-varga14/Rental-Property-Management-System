@@ -3,9 +3,12 @@ import java.awt.event.*;
 
 import view.DuplicateEmailErrorView;
 
+//Controller class for Duplicate Email view when signing up
 public class DuplicateEmailErrorController implements ActionListener
 {
 	private DuplicateEmailErrorView errorView;
+	private SignUpController signUpController;
+	private LoginController loginController;
 	
 	public DuplicateEmailErrorController()
 	{
@@ -24,11 +27,11 @@ public class DuplicateEmailErrorController implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("try again")) {
 			errorView.setVisible(false);
-			SignUpController signUpController = new SignUpController();
+			signUpController = new SignUpController();
 		}
 		if(e.getActionCommand().equals("sign in")) {
 			errorView.setVisible(false);
-			LoginController loginController = new LoginController();
+			loginController = new LoginController();
 		}
 	}
 }

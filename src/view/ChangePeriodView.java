@@ -11,14 +11,16 @@ import javax.swing.JTextField;
 
 import model.PropertyFees;
 
+//Change Fee View
 public class ChangePeriodView extends JFrame
 {
-	
-	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
+	//Buttons for commands and JField for new period input
+	 ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	 JButton changeFeeButton = new JButton("Change Period");
 	 JButton cancelButton = new JButton("Cancel Change");
-	 JTextField newFee = new JTextField();
+	 JTextField newPeriod = new JTextField();
 	 
+	//CTOR to set up JFRAME
 	 public ChangePeriodView() {
 		setTitle("Master Rental Property Management - Modify Property Listing Period");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,11 +42,10 @@ public class ChangePeriodView extends JFrame
 		newPeriodBox.setBounds(10, 60, 130, 20);
 	   	getContentPane().add(newPeriodBox);
 	   
-		newFee.setBounds(150, 60, 80, 30);
-	   	getContentPane().add(newFee);
-	   	newFee.setColumns(10);
+	   	newPeriod.setBounds(150, 60, 80, 30);
+	   	getContentPane().add(newPeriod);
+	   	newPeriod.setColumns(10);
 		 
- 	
 	   	changeFeeButton.setBounds(70, 100, 120, 30);
 	   	getContentPane().add(changeFeeButton);
 	   	changeFeeButton.setActionCommand("change period");
@@ -54,15 +55,16 @@ public class ChangePeriodView extends JFrame
 	   	cancelButton.setActionCommand("cancel");
 	 }
 	 
+	//ActionListeners for both buttons, linked to ChangePeriod Controller
 	 public void addChangePeriodListener(ActionListener a)  {
 		 changeFeeButton.addActionListener(a);
 	 }
 	 public void addCancelListener(ActionListener a)  {
 		 cancelButton.addActionListener(a);
 	 }
-	 
+	//Getter to get contents of TextField
 	 public String getNewPeriodField()
 	 {
-			return newFee.getText();
+			return newPeriod.getText();
 	 }
 }

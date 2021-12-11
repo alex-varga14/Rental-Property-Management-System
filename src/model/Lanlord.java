@@ -2,22 +2,26 @@ package model;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+//Lanlord Model
+//Singleton Design Pattern
 public class Lanlord
 {
+	//Fields to hold lanlord instance, lanlordProperties,email and password
 	private ArrayList<Property> LanlordProperties = new ArrayList<Property>();
 	private static Lanlord instance;
 	private String emailAddress;
 	private String password;
 	
+	//Lanlord ctor
 	public Lanlord(String emailAddress, String password)
 	{
 		this.setEmailAddress(emailAddress);
 		this.setPassword(password);
 	}
+	//default ctor for lanlord
+	public Lanlord() {}
 	
-	public Lanlord() {
-	}
-	
+	//Initial sign up lanlord Instance
 	public static Lanlord getInstance(String emailAddress, String password)
 	{
 		if(instance == null) 
@@ -26,7 +30,7 @@ public class Lanlord
 		}
 		return instance;
 	}
-	
+	//get lanlord instance once signed up
 	public static Lanlord getInstance()
 	{
 		if(instance == null) 
@@ -36,24 +40,18 @@ public class Lanlord
 		return instance;
 	}
 	
-	
+	//Register property function, sets property fees and period as well as ACTIVE listing state
 	public Property registerProperty(String type, String address, int nBath, int nBed, boolean furn, String quad, String email)
 	{
 		Property newProperty = new Property(type, address, nBath, nBed, furn, quad);
 		newProperty.setInformation(new PropertyFees());
-		System.out.println("Fees paid");
 		newProperty.setState(ListingState.ACTIVE);
-		new PropertyListings(newProperty);
 		newProperty.setLanlordEmail(this.getEmailAddress());
-		System.out.println("Email: "+ email);
 		LanlordProperties.add(newProperty);
 		return newProperty;
 	}
 	
-	public Property getPropertyIndex(int i) {
-		return LanlordProperties.get(i);
-	}
-	
+	//Simple getters and setters for functionality
 	public ArrayList<Property> getLanlordProperties()
 	{
 		return LanlordProperties;

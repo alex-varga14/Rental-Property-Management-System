@@ -4,9 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import view.SummaryView;
 
+//Summary Report Controller for manager functionality
 public class SummaryController implements ActionListener
 {
 	private SummaryView theView;
+	private ManagerController managerController;
 	
 	public SummaryController()
 	{
@@ -24,7 +26,7 @@ public class SummaryController implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("home")) {
 			theView.setVisible(false);
-			ManagerController managerController = new ManagerController();
+			managerController = new ManagerController();
 		}
 	}
 }
