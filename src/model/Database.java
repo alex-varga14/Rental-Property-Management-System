@@ -20,7 +20,7 @@ public class Database
 	this.DBURL = "jdbc:mysql://localhost/rentalproperties";
     this.USERNAME = "alexcode";
     this.PASSWORD = "glorycode";
-    initializeConnection();
+    //initializeConnection();
     };
 	
 	public static Database getInstance()
@@ -33,9 +33,17 @@ public class Database
 	}
 
 	//intializes database connection
-	public void initializeConnection(){
+//	public void initializeConnection(){
+//		try{
+//		   dbConnect = DriverManager.getConnection(this.DBURL, this.USERNAME, this.PASSWORD);
+//			System.out.println("Connected");
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}	
+//	}
+	public void initializeConnection(String u, String p){
 		try{
-		   dbConnect = DriverManager.getConnection(this.DBURL, this.USERNAME, this.PASSWORD);
+		   dbConnect = DriverManager.getConnection(this.DBURL, u, p);
 			System.out.println("Connected");
 		} catch (SQLException e) {
 			e.printStackTrace();
