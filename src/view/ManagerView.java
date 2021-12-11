@@ -16,8 +16,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+//Manager Homepage view
 public class ManagerView extends JFrame
 {
+	//all necessary components to implement manager functionalities
 	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	private JMenu properties = new JMenu("Properties");
 	private JMenu propertieFees = new JMenu("Property Fees/Period");
@@ -31,7 +33,7 @@ public class ManagerView extends JFrame
 	private JMenuItem propertiesInfo = new JMenuItem("View Properties Information");
 	private JMenuItem viewSummary = new JMenuItem("View Summary");
 	
-	
+	//CTOR to construct manager homepage
 	public ManagerView()
 	{
 		setTitle("Master Rental Property Management - Manager Signed in");
@@ -86,6 +88,7 @@ public class ManagerView extends JFrame
 	    setJMenuBar(bar);
 		}
 		
+		//action listeners for all functional components related to manager view
 		public void addViewPropertyListener(ActionListener a) {
 			viewListedProperties.addActionListener(a);
 		}

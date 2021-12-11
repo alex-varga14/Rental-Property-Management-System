@@ -10,17 +10,13 @@ import javax.swing.table.DefaultTableModel;
 
 import model.Database;
 
+//Manager Information view 
 public class InformationView extends JFrame
 {
 	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
-	
-	String[][] data;
-	
 	String[][] dataa;
 	JTable propertyTable;
-	
-	DefaultTableModel model;
-	
+	//CTOR to set up Jframe of desired information
 	public InformationView(String infoType)
 	{
 		setTitle("Master Rental Property Management - " + infoType + " Information");
@@ -58,7 +54,7 @@ public class InformationView extends JFrame
 		getContentPane().add(sp);
 
 	}
-	
+	//functions to populate JTables for renters, lanlords or properties
 	public void populateRenterData()
 	{
 		Database access = Database.getInstance();

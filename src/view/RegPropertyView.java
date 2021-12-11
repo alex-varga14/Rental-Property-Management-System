@@ -14,8 +14,10 @@ import model.Property;
 import model.PropertyTypes;
 import model.Quadrant;
 
+//Registering property view for lanlord
 public class RegPropertyView extends JFrame
 {
+	//all arrays of values for properties, to fill JComboBox's
 	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	JButton enterButton = new JButton("Register Property");
 	String[] propertyTypes = {"", PropertyTypes.APARTMENT.toString(), PropertyTypes.CONDO.toString(), PropertyTypes.ATTACHED_HOUSE.toString(), PropertyTypes.DETACHED_HOUSE.toString(), 
@@ -32,6 +34,8 @@ public class RegPropertyView extends JFrame
 	JComboBox<String> quadrantComboBox = new JComboBox<>(quadrants);
 	JTextField addressInput = new JTextField();
 	
+	
+	//ctor for JFrame
 	public RegPropertyView()
 	{
 		setTitle("Master Rental Property Management - Register Property");
@@ -93,11 +97,11 @@ public class RegPropertyView extends JFrame
     	addressInput.setColumns(10);
 			
 	}
-	
+	//action listeners
 	public void addRegPropertyListener(ActionListener al)  {
     	enterButton.addActionListener(al);
 	}
-	
+	//getters for JComboBox entries
 	public String getPropertyBox()
 	{
 		return propertyComboBox.getSelectedItem().toString();
@@ -130,6 +134,4 @@ public class RegPropertyView extends JFrame
 	{
 		return addressInput.getText();
 	}
-	
-
 }

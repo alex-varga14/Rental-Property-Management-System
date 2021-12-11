@@ -10,13 +10,14 @@ import javax.swing.JLabel;
 
 import model.PropertyFees;
 
+//property fee view for lanlord after registration
 public class PropertyFeesView  extends JFrame
 {
 	 ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	 JButton enterButton = new JButton("List Property");
 	 JButton signUpButton = new JButton("Cancel Registration");
 	 
-	 
+	 //sets up JFrame
 	 public PropertyFeesView() {
 		setTitle("Master Rental Property Management - Property Fee");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,7 +47,7 @@ public class PropertyFeesView  extends JFrame
 	   	getContentPane().add(signUpButton);
 	   	signUpButton.setActionCommand("cancel");
 	 }
-	 
+	 //action listners
 	 public void addListPropertyListener(ActionListener a)  {
 	    	enterButton.addActionListener(a);
 	 }

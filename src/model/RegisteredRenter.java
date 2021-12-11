@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class RegisteredRenter 
 {
 	//Fields to hold matched properties, email and password
-	public ArrayList<Property> favouritedProperties;
+	//private MatchingProperties notifications;
 	private static RegisteredRenter instance;
 	private String emailAddress;
 	private String password;

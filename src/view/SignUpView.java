@@ -13,8 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+//sign up view
 public class SignUpView extends JFrame
 {
+	//includes textfield for email address and pass word entry as well as JComboBox for user type
 	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	private JTextField emailInput;
 	String[] optionsToChoose = {"Manager", "Lanlord", "Registered Renter"};
@@ -25,6 +27,7 @@ public class SignUpView extends JFrame
 	private JPasswordField password;
 	private JButton enterButton = new JButton("Sign Up");
 	
+	//ctor for jframe
 	public SignUpView() {
 		setTitle("Master Rental Property Management - Sign Up");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,7 +72,7 @@ public class SignUpView extends JFrame
     	getContentPane().add(enterButton);
     	enterButton.setActionCommand("sign up");
 	}
-	
+	//getters and stters for textfields
     public String getEmail()  {
 		return emailInput.getText();
 	}
@@ -82,7 +85,7 @@ public class SignUpView extends JFrame
 	{
 		return jComboBox.getSelectedItem().toString();
 	}
-	
+	//action listener
 	public void addSignUpListener(ActionListener al)  {
     	enterButton.addActionListener(al);
 	}

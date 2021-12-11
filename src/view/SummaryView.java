@@ -15,23 +15,21 @@ import javax.swing.table.DefaultTableModel;
 
 import model.Database;
 
+//Summary view for manager
 public class SummaryView extends JFrame
 {
+	//data fields to populate view
 	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	Database access = Database.getInstance();
 	int totalHouses;
 	int rentedHouses;
 	int activeListings;
 	JButton backHome = new JButton("Return Home");
-	
 	String[][] dataa;
 	JTable propertyTable;
-	
-	DefaultTableModel model;
-	
 	String[] columnNames = { "LanlordEmail", "ID","Address"};
 	
-	
+	//ctor to set up jframe
 	public SummaryView()
 	{
 		setTitle("Master Rental Property Management - Summary Report");
@@ -83,9 +81,8 @@ public class SummaryView extends JFrame
 		backHome.setBounds(250, 300, 120, 30);
 	   	getContentPane().add(backHome);
 	   	backHome.setActionCommand("home");
-	   	
 	}
-	
+	//action listenesr
 	public void addHomePageListener(ActionListener a)  {
 		backHome.addActionListener(a);
 	 }

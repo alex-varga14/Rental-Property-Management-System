@@ -18,47 +18,28 @@ import model.Database;
 import model.Lanlord;
 import model.Manager;
 
-
+//Property view for various property functionalities
 public class PropertyView extends JFrame
 {
 	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
-	private ArrayList<Property> propertyList = new ArrayList<Property>();
-	
+	//was going to implement random pictures with each property but didnt have time nad Jtable was being annoying
 	//String[] columnNames = {"Picture", "ID", "Type","numOfBathroom",  "numOfBedroom", "isFurnished", "Address", "cityQuadrant", "ListingState"};
 	String[] columnNames = { "ID", "Type","numOfBathroom",  "numOfBedroom", "isFurnished", "Address", "cityQuadrant", "ListingState"};
-	String[][] data;
-	
 	String[][] dataa;
 	JTable propertyTable;
 	String selected;
 	String ID;
-	
+	//buttons for renters, lanlrods and manager functionalities
 	JButton emailButton = new JButton("Email Lanlord About Selected Property?");
 	JButton changeStateButton = new JButton("Change state of Property Listing?");
-	
+	//booleans to hold if a filter has been set
 	protected boolean typeFilter = false;
 	protected boolean bathFilter = false;
 	protected boolean bedFilter = false;
 	protected boolean furnFilter = false;
 	protected boolean quadFilter = false;
-	
-//	public PropertyView(String type, int nBath, int nBed, boolean furn, String quad) {
-//		setTitle("Master Rental Property Management - Listed Properties");
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		getContentPane().setBackground(Color.white);
-//		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//		int height = screenSize.height;
-//		int width = screenSize.width;
-//		setSize(width/2, height/2);
-//		setLocationRelativeTo(null);
-//		setIconImage(img.getImage());
-//		populateData(type, nBath, nBed, furn, quad);
-//		propertyTable = new JTable(dataa, columnNames);
-//		JScrollPane sp = new JScrollPane(propertyTable);
-//		sp.setBounds(10, 50, 200, 200);
-//		getContentPane().add(sp);
-//		
-//	}
+
+	//ctor for JFrame if no filters set
 	public PropertyView() {
 		setTitle("Master Rental Property Management - Listed Properties");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,8 +61,6 @@ public class PropertyView extends JFrame
 		changeStateButton.setBounds(180, 360, 300, 30);
 		changeStateButton.setActionCommand("state");
 		
-		
-		
 		JScrollPane sp = new JScrollPane(propertyTable);
 		sp.setBounds(00, 00, width/2 - 10, 200);
 		getContentPane().add(sp);
@@ -114,6 +93,7 @@ public class PropertyView extends JFrame
 		});
 	}
 	
+	//ctor if filters are set
 	public PropertyView(boolean[] flags,  String type, int beds, int baths, int furn, String quad) {
 		setTitle("Master Rental Property Management - Listed Properties");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -135,8 +115,6 @@ public class PropertyView extends JFrame
 		changeStateButton.setBounds(180, 360, 300, 30);
 		changeStateButton.setActionCommand("state");
 		
-		
-		
 		JScrollPane sp = new JScrollPane(propertyTable);
 		sp.setBounds(00, 00, width/2 - 10, 200);
 		getContentPane().add(sp);
@@ -168,7 +146,7 @@ public class PropertyView extends JFrame
 			}
 		});
 	}
-	
+	//action listeners for functionality components
 	public void addEmailListener(ActionListener a)  {
 		emailButton.addActionListener(a);
 	}
@@ -176,7 +154,7 @@ public class PropertyView extends JFrame
 	public void addStateListener(ActionListener a)  {
 		changeStateButton.addActionListener(a);
 	}
-	
+	//getters for Jtable data
 	public String getSelected()
 	{
 		return selected;
@@ -186,9 +164,10 @@ public class PropertyView extends JFrame
 	{
 		return ID;
 	}
-	
+	//function to determine which filters are set, bad implementation
 	public void populateData(boolean[] flags,  String type, int beds, int baths, int furn, String quad)
 	{
+		//get database connection
 		Database access = Database.getInstance();
 		access.getConnection();
 		if((flags[0] == false) && (flags[1] == false) &&(flags[2] == false) &&(flags[3] == false) &&(flags[4] == false))
@@ -357,12 +336,11 @@ public class PropertyView extends JFrame
 		{
 			dataa = access.getAllFilteredProperties28(quad);
 		}
-		
-		//propertyTable.setDefaultEditor(Object.class, null);
 	} 
-	
+	//populate properties without filters
 	public void populateData()
 	{
+		//get database conneciton
 		Database access = Database.getInstance();
 		access.getConnection();
 		if(Lanlord.getInstance().getEmailAddress() != null)

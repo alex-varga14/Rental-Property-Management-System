@@ -15,8 +15,10 @@ import javax.swing.JTextField;
 import model.PropertyTypes;
 import model.Quadrant;
 
+//search property view
 public class SearchView extends JFrame
 {
+	//components and arrays of values 
 	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	String[] propertyTypes = {"", PropertyTypes.APARTMENT.toString(), PropertyTypes.CONDO.toString(), PropertyTypes.ATTACHED_HOUSE.toString(), PropertyTypes.DETACHED_HOUSE.toString(), 
 			PropertyTypes.TOWN_HOUSE.toString(), PropertyTypes.SINGLE_FAMILY_HOME.toString(), PropertyTypes.MULTI_FAMILY_HOME.toString() };
@@ -31,6 +33,7 @@ public class SearchView extends JFrame
 	JComboBox<String> furnishedComboBox = new JComboBox<>(furnishedArr);
 	JComboBox<String> quadrantComboBox = new JComboBox<>(quadrants);
 	
+	//ctor for JFrame setup
 	public SearchView() {
 		setTitle("Search Listed Master Management Properties - Search Properties");
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,10 +85,12 @@ public class SearchView extends JFrame
         search.setActionCommand("search");
     	getContentPane().add(search);
 	}
-	
+	//action listners
 	public void addSearchListener(ActionListener a)  {
 		search.addActionListener(a);
 	}
+	
+	//getters and setters for JComboBoxs
 	public String getPropertyBox()
 	{
 		return propertyComboBox.getSelectedItem().toString();

@@ -14,6 +14,7 @@ public class DuplicateEmailErrorView extends JFrame
 	JButton enterButton = new JButton("Try again");
 	JButton signInButton = new JButton("Sign In");
 	
+	//CTOR to construct frame
 	public DuplicateEmailErrorView() {
 		setTitle("Master Rental Property Management - Sign Up Error");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,6 +39,8 @@ public class DuplicateEmailErrorView extends JFrame
 	   	signInButton.setActionCommand("sign in");
 	 }
 	 
+	
+	//adding actionlisteners
 	 public void addTryAgainListener(ActionListener a)  {
 	    	enterButton.addActionListener(a);
 	 }

@@ -7,12 +7,13 @@ import controller.LoginController;
 
 public class Database 
 {
+	//Databse fields for connectivity, SQL standard
 	public final String DBURL;
 	public final String USERNAME;
 	public final String PASSWORD;
 	private Connection dbConnect;
 	private ResultSet results;
-	
+	//implements singleton
 	private static Database instance;
 	
 	private Database() {
@@ -31,7 +32,7 @@ public class Database
 		return instance;
 	}
 
-	
+	//intializes database connection
 	public void initializeConnection(){
 		try{
 		   dbConnect = DriverManager.getConnection(this.DBURL, this.USERNAME, this.PASSWORD);
@@ -40,12 +41,12 @@ public class Database
 			e.printStackTrace();
 		}	
 	}
-	
+	//gets connection to database
 	public Connection getConnection() 
 	{
 		return dbConnect;
 	}
-	
+	//function to find a user in the database, see if can sign in
 	 public String findUser(String type, String p){
         StringBuilder tmp = new StringBuilder("");
         try {
@@ -62,7 +63,7 @@ public class Database
         //return "USER NOT FOUND";
         return tmp.toString();
     }
-	 
+	 //function to query database for lanlord email from property ID
 	 public String findLanlordEmail(String ID){
         StringBuilder tmp = new StringBuilder("");
         try {
@@ -77,7 +78,7 @@ public class Database
 		}
         return tmp.toString();
     }
-	 
+	 //function to add user to database, used in sign up
 	 public void addUser(String username, String password, String logintype)
 	 {
 		 try {
@@ -99,7 +100,7 @@ public class Database
 	        }
 		 LoginController login = new LoginController();
 	 }
-	 
+	 //function to query database and update property state, for lanlord and manageer functionality
 	 public void updatePropertyState(String propID, String s) {
 		 try 
 		 {
@@ -111,8 +112,7 @@ public class Database
 			e.printStackTrace();
 		}
 	 }
-	 
-		
+	 //function to list new property into listed property list
 	public void listNewProperty(Property n)
 	{
         try {
@@ -137,7 +137,7 @@ public class Database
             ex.printStackTrace();
         }
 	}
-	
+	//function to query database for all properties
 	public String[][] getAllProperties()
 	{
 		String[][] propertyData = new String[numberOfProperties()][];
@@ -161,7 +161,7 @@ public class Database
 		}
 		return propertyData;
 	}
-	
+	//function to getr all properties for manager view, diffrent from above becuase lanlord email is viewable
 	public String[][] getAllPropertiesManager()
 	{
 		String[][] propertyData = new String[numberOfProperties()][];
@@ -186,6 +186,7 @@ public class Database
 		}
 		return propertyData;
 	}
+	//function to query database for manager summary report
 	public String[][] getAllPropertiesManagerSummary()
 	{
 		String[][] propertyData = new String[numberOfProperties()][];
@@ -207,7 +208,7 @@ public class Database
 		}
 		return propertyData;
 	}
-	
+	//function to query database for all properties associated with desired lanlord
 	public String[][] getAllLanlordProperties(String e)
 	{
 		String[][] propertyData = new String[lanlordnNumberOfProperties()][];
@@ -232,14 +233,13 @@ public class Database
 		return propertyData;
 	}
 	/*
-	 * 
-	 * //int randomPropertyPicture = (int)(1 + (Math.random() * 4));
+	//int randomPropertyPicture = (int)(1 + (Math.random() * 4));
 				//ImageIcon randomImage = new ImageIcon("C:\\Users\\Alex School\\Desktop\\git\\Rental Property Management System\\Rental Property Management System\\src\\assets/"+ randomPropertyPicture + "jpg");
 //				propertyData[i] = new Object[]{randomImage,  rs.getString("ID"), rs.getString("TYPE"), String.valueOf(rs.getInt("numberOfBaths")),
 //						String.valueOf( rs.getInt("numberOfBedrooms")), (rs.getString("FURNISHED").equals("1")) ? "Yes" : "No",
 //								rs.getString("ADDRESS"), rs.getString("QUADRANT"), rs.getString("STATEOFLISTING") };
 	 */
-	
+	//function to query database for all renters
 	public String[][] getAllRenters()
 	{
 		String[][] renterData = new String[numberOfRenters()][];
@@ -261,6 +261,7 @@ public class Database
 		}
 		return renterData;
 	}
+	//function to query database for all lanlords
 	public String[][] getAllLanlords()
 	{
 		String[][] renterData = new String[numberOfLanlords()][];
@@ -282,7 +283,7 @@ public class Database
 		}
 		return renterData;
 	}
-	
+	//function to query database for the number of total properties
 	public int numberOfProperties()
 	{
 		int count = 0;
@@ -301,7 +302,7 @@ public class Database
 		}
 		return count;
 	}
-	
+	//function to query database for the number of total RENTED properties
 	public int numberOfRentedProperties()
 	{
 		int count = 0;
@@ -320,7 +321,7 @@ public class Database
 		}
 		return count;
 	}
-	
+	//function to query database for the number of total ACTIVE property listings
 	public int numberOfActiveProperties()
 	{
 		int count = 0;
@@ -339,6 +340,7 @@ public class Database
 		}
 		return count;
 	}
+	//function to query database for the number of total renters
 	public int numberOfRenters()
 	{
 		int count = 0;
@@ -356,8 +358,8 @@ public class Database
 			i.printStackTrace();
 		}
 		return count;
-	}
-	
+	}	
+	//function to query database for the number of total lanlords
 	public int numberOfLanlords()
 	{
 		int count = 0;
@@ -376,7 +378,7 @@ public class Database
 		}
 		return count;
 	}
-	
+	//function to query database for the number of totallanlord properties 
 	public int lanlordnNumberOfProperties()
 	{
 		int count = 0;
@@ -395,7 +397,7 @@ public class Database
 		}
 		return count;
 	}
-	
+	//function to search listings, was used for a JTextfield originally but disbanded, could be implemented again
 	public void searchListings(String propertyType, int numberOfBaths, int numberOfBedrooms, boolean furnished, String quadrant)
 	{
 		StringBuffer tmp = new StringBuffer();
@@ -421,7 +423,7 @@ public class Database
 		}
 		System.out.println(tmp.toString());
 	}
-	
+	//function to send email into database 
 	public void sendEmail(String sender, String receiver, String body)
 	 {
 		 try {
@@ -438,7 +440,7 @@ public class Database
 	            ex.printStackTrace();
 	        }
 	 }
-	
+	//function to get all emails from inbox
 	public String[][] getAllMessages()
 	{
 		String[][] inbox = new String[numberOfMessages()][];
@@ -460,7 +462,7 @@ public class Database
 		}
 		return inbox;
 	}
-	
+	//function to query database for the number of messages
 	public int numberOfMessages()
 	{
 		int count = 0;
@@ -1365,17 +1367,7 @@ public class Database
 		}
 		return propertyData;
 	}
-	
-	
-
 }
-/*
 
-    Statement myStmt = dbConnect.createStatement();
-            results = myStmt.executeQuery("INSERT INTO listedproperties ( type, nBath, nBed, furnished, address, quadrant, state, startPeriod, endPeriod)"
-            		+ " VALUES ( '" + n.getTypeOfProperty() + "', '" + n.getNumberOfBathrooms() + "', '" + n.getNumberOfBedrooms() + "', '" + n.getAddress()
-            		+ "', '" + n.isFurnished() + "', '" + n.getQuadrant() + "', '" + n.getState().toString() + "', '" + n.getInformation().getFeePeriodStart() +
-            		"', '" + n.getInformation().getFeePeriodEnd() + "' );");
- */
 
 

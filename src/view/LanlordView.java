@@ -18,8 +18,12 @@ import javax.swing.JMenuItem;
 
 import model.Lanlord;
 
+
+//Lanlord Homepage view
 public class LanlordView extends JFrame
 {
+	
+	//all necessary components
 	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	private JMenu properties = new JMenu("Properties");
 	private JMenu emails = new JMenu("Emails");
@@ -28,6 +32,7 @@ public class LanlordView extends JFrame
 	private JMenuItem inbox = new JMenuItem("Inbox");
 	private JMenuItem sendEmail = new JMenuItem("Send Email");
 	
+	//CTOR to construct lanlord homepage
 	public LanlordView()
 	{
 		setTitle("Master Rental Property Management - Lanlord Signed in");
@@ -41,14 +46,14 @@ public class LanlordView extends JFrame
 		setSize(width/2, height/2);
 		setLocationRelativeTo(null);
 		setIconImage(img.getImage());
+		//set background image
 		try
 		{
 			setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("C:\\Users\\Alex School\\eclipse-workspace\\ENSF480_RPMS\\src\\assets/LLBackground.jpg")))));
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
-		
-		
+		//set up menu bar
 		JMenuBar bar = new JMenuBar();
 		
 		properties.setMnemonic(KeyEvent.VK_S);
@@ -57,7 +62,6 @@ public class LanlordView extends JFrame
 		viewListedProperties.setActionCommand("view listed");
 		regNewProperty.setActionCommand("register new property");
 
-		
 		bar.add(properties);
 		bar.add(Box.createHorizontalGlue());
 		
@@ -70,7 +74,7 @@ public class LanlordView extends JFrame
 		
         setJMenuBar(bar);
 	}
-	
+	//action listners for various menus
 	public void addViewPropertyListener(ActionListener a) {
 		viewListedProperties.addActionListener(a);
 	}

@@ -8,13 +8,16 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
 
+
+//send email view for sending emails
 public class SendEmailView extends JFrame
 {
+	//JtextArea for body of email
 	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
-	
 	JTextArea message = new JTextArea();
     JButton sendEmail = new JButton("Send Email");
 	
+    //set up JFrame
 	public SendEmailView()
 	{
 		setTitle("Master Rental Property Management - Send Email");
@@ -28,7 +31,6 @@ public class SendEmailView extends JFrame
 		setIconImage(img.getImage());
         
         sendEmail.setActionCommand("send email");
-
         JLabel space2 = new JLabel("  ");
 
         JScrollPane emailBody = new JScrollPane(message);
@@ -48,11 +50,11 @@ public class SendEmailView extends JFrame
         all.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         add(all);
 	}
-	
+	//action listener to send email
 	public void addSendEmailListener(ActionListener a)  {
 		sendEmail.addActionListener(a);
 	}
-	
+	//getter for JTextArea
 	public String getBody ()
 	{
 		return message.getText();

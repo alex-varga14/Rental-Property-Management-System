@@ -8,13 +8,18 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
+//Login View
 public class LoginView extends JFrame 
 {
+	//buttons for signing in and JTextFields for email and password input
 	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	JButton enterButton = new JButton("Sign In");
 	JTextField emailInput;
 	JPasswordField password;
 	
+	
+	//CTOR to set up the Jframe
     public LoginView() {
     	setTitle("Master Rental Property Management - Login");
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,10 +55,11 @@ public class LoginView extends JFrame
     	enterButton.setActionCommand("login");
     }
     
+    //action listener for sign up button
     public void addLoginListener(ActionListener al)  {
     	enterButton.addActionListener(al);
 	}
-    
+    //getters for text fields
     public String getEmail()  {
 		return emailInput.getText();
 	}

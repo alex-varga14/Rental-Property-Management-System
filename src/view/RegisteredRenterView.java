@@ -16,8 +16,11 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+//registered renter homepage view
 public class RegisteredRenterView extends JFrame
 {
+	
+	//Components for all RR functionalities
 	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	private JMenu searchProperties = new JMenu("Search Properties");
 	private JMenu matchedProperties = new JMenu("Matching Properties");
@@ -27,6 +30,8 @@ public class RegisteredRenterView extends JFrame
 	private JMenuItem inbox = new JMenuItem("Inbox");
 	private JMenuItem sendEmail = new JMenuItem("Send Email");
 	
+	
+	//ctor to set up JFrame
 	public RegisteredRenterView()
 	{
 		setTitle("Master Rental Property Management - Registered Renter Signed in");
@@ -69,7 +74,7 @@ public class RegisteredRenterView extends JFrame
 		
         setJMenuBar(bar);
 	}
-	
+	//action listeners for functional components
 	public void addSearchListener(ActionListener a) {
 		search.addActionListener(a);
 	}

@@ -14,7 +14,7 @@ import model.PropertyFees;
 //Change Fee View
 public class ChangeFeeView extends JFrame
 {
-	//Company Logo
+	 //Company Logo
 	 ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	 //Buttons for commands
 	 JButton enterButton = new JButton("Change Fee");

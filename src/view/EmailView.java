@@ -11,11 +11,13 @@ public class EmailView extends JFrame
 	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	Database access = Database.getInstance();
 	
+	//Email compoents for frame
 	String[] columnNames = { "Sender", "Email"};
 	JTable inbox;
 	String[][] dataa;
 	JButton backHome = new JButton("Return Home");
 	
+	//set Up JFrame for email inbox
 	public EmailView()
 	{
 		setTitle("Master Rental Property Management - Email Inbox");
@@ -43,11 +45,12 @@ public class EmailView extends JFrame
 	   	backHome.setActionCommand("home");
 	}
 	
+	//function to get all inbox messsages
 	public void populateInbox()
 	{
 		dataa = access.getAllMessages();
 	}
-	
+	//action listners to go back to home page
 	public void addHomePageListener(ActionListener a)  {
 		backHome.addActionListener(a);
 	 }

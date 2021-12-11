@@ -9,12 +9,14 @@ import java.io.IOException;
 
 public class ClientView extends JFrame
 {
+	//Client Menus and Buttons
 	private JButton start = new JButton("View Properties");
 	private JMenu sourceMenu = new JMenu("Login or Sign Up");
 	private JMenuItem login = new JMenuItem("Login");
 	private JMenuItem signUp = new JMenuItem("Sign Up");
 	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
 	
+	//CTOR for client view set up JFrame
 	public ClientView() {
 		setTitle("Master Rental Property Management");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,6 +66,7 @@ public class ClientView extends JFrame
 		start.setActionCommand("view properties");
     }
 	
+	//Add actionlistners
 	public void addStartListener(ActionListener a)  {
     	start.addActionListener(a);
 	}

@@ -8,11 +8,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+//view to error handlt login errors, ie same username or invalid
 public class ErrorView extends JFrame
 {
-	ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
-	JButton enterButton = new JButton("Try again");
+	 ImageIcon img = new ImageIcon(".\\src\\assets/Untitled.png");
+	 JButton enterButton = new JButton("Try again");
 	 JButton signUpButton = new JButton("Sign Up");
+	 
+	 //set up JFrame
 	 public ErrorView() {
 		setTitle("Master Rental Property Management - Login Error");
     	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,7 +39,7 @@ public class ErrorView extends JFrame
     	getContentPane().add(signUpButton);
     	signUpButton.setActionCommand("sign up");
 	 }
-	 
+	 //action listeners
 	 public void addTryAgainListener(ActionListener a)  {
 	    	enterButton.addActionListener(a);
 	 }
