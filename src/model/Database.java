@@ -8,18 +8,18 @@ import controller.LoginController;
 public class Database 
 {
 	//Databse fields for connectivity, SQL standard
-	public final String DBURL;
-	public final String USERNAME;
-	public final String PASSWORD;
-	private Connection dbConnect;
+	public static final String DBURL = "jdbc:mysql://localhost/rentalproperties";
+	public static String USERNAME;
+	public static String PASSWORD;
+	private static Connection dbConnect;
 	private ResultSet results;
 	//implements singleton
 	private static Database instance;
 	
 	private Database() {
-	this.DBURL = "jdbc:mysql://localhost/rentalproperties";
-    this.USERNAME = "alexcode";
-    this.PASSWORD = "glorycode";
+	//this.DBURL = "jdbc:mysql://localhost/rentalproperties";
+//    this.USERNAME = "alexcode";
+//    this.PASSWORD = "glorycode";
     //initializeConnection();
     };
 	
@@ -41,9 +41,11 @@ public class Database
 //			e.printStackTrace();
 //		}	
 //	}
-	public void initializeConnection(String u, String p){
+	public static void initializeConnection(String u, String p){
+		 USERNAME = u;
+		 PASSWORD = p;
 		try{
-		   dbConnect = DriverManager.getConnection(this.DBURL, u, p);
+		   dbConnect = DriverManager.getConnection(DBURL, USERNAME, PASSWORD);
 			System.out.println("Connected");
 		} catch (SQLException e) {
 			e.printStackTrace();

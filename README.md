@@ -2,9 +2,13 @@
 ---
 This application allows for renters to view and email about properties, lanlords to register and view listings, and for managers to view summary reports and change information related to properties.
 ---
-### MySQL
+## MySQL
 - Allows users to create a database connection with the defined .sql file.
 ---
+## Design Patterns
+- Implements MVC Pattern throughout the program
+- Implements Singleton Pattern 
+- Implements an Observer Pattern
 ### Starting the program with the .jar
 - To run, fork and reach the main source path and run the command:
 - `java -jar RPMS.jar <username> <password>`
